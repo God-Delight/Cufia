@@ -1,0 +1,1531 @@
+/* ==========================================================================
+   1. DESIGN TOKENS & CSS CUSTOM PROPERTIES
+   ========================================================================== */
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.97845987 0.00453078 258.324487);
+  --foreground: oklch(0.1915161 0.02622837 263.65753754);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.57410462 0.20152 261.99624584);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.943 0.011 250);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--secondary);
+  --muted-foreground: oklch(0.49 0.023 250);
+  --accent: oklch(0.69637686 0.12046241 185.71061272);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.912 0.013 250);
+  --input: var(--border);
+  --ring: var(--primary);
+  --ink: oklch(0.1915161 0.02622837 263.65753754);
+  --on-dark: oklch(0.97845987 0.00453078 258.324487);
+  --dark-surface: oklch(0.25 0.032 256);
+  --teal: oklch(0.69637686 0.12046241 185.71061272);
+  --cta: oklch(0.80691818 0.16622794 81.75375212);
+  --cta-foreground: var(--ink);
+  --photo-scrim: linear-gradient(
+    180deg,
+    transparent 30%,
+    oklch(0.192 0.026 264 / 0.92) 100%
+  );
+  --footer-scrim: linear-gradient(
+    180deg,
+    oklch(0.192 0.026 264 / 0.42),
+    oklch(0.192 0.026 264 / 0.96)
+  );
+  --menu-shadow: 0 12px 32px oklch(0.192 0.026 264 / 0.22);
+}
+
+:root {
+  --font-sans: Inter, sans-serif;
+  --font-heading: Fraunces, Georgia, serif;
+}
+/* ==========================================================================
+   2. GLOBAL RESETS & BASE TYPOGRAPHY
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+}
+svg {
+  display: block;
+}
+details:not([open]) > :not(summary) {
+  display: none;
+}
+/* ==========================================================================
+   3. COMMON LAYOUT & REUSABLE COMPONENTS
+   ========================================================================== */
+.cufia-page {
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  background: var(--background);
+  color: var(--ink);
+  overflow-x: clip;
+  overflow-y: visible;
+}
+.cufia-page * {
+  box-sizing: border-box;
+}
+.cufia-page h1,
+.cufia-page h2,
+.cufia-page h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.cufia-page h1 {
+  font-size: 76px;
+  line-height: 1.08;
+  margin: 0;
+}
+.cufia-page h2 {
+  font-size: 43px;
+  line-height: 1.13;
+  margin: 0;
+}
+.cufia-page h3 {
+  font-size: 23px;
+  line-height: 1.2;
+  margin: 0;
+}
+.cufia-page p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.cufia-page a {
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.cufia-page a:hover {
+  opacity: 0.8;
+}
+.cufia-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wrap {
+  width: 74%;
+  max-width: 1400px;
+  margin-inline: auto;
+}
+.screen-section {
+  min-height: 100svh;
+  position: relative;
+  scroll-margin-top: 24px;
+}
+.section-inner {
+  padding-block: 90px;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 78px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px !important;
+  margin-bottom: 16px !important;
+  color: var(--muted-foreground);
+}
+.eyebrow > span {
+  width: 5px;
+  height: 5px;
+  background: var(--teal);
+}
+.cufia-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  background: var(--cta);
+  color: var(--cta-foreground);
+  border-radius: 0;
+  box-shadow: none;
+  height: 43px;
+  padding: 5px 5px 5px 20px;
+  font-size: 12px;
+  gap: 20px;
+}
+.cufia-cta:hover {
+  background: var(--cta);
+}
+.cufia-cta > span {
+  background: var(--ink);
+  color: var(--cta);
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+}
+.quiet-cta {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-weight: 600;
+}
+.quiet-cta:hover {
+  background: var(--card);
+}
+.quiet-cta > span {
+  color: var(--on-dark);
+}
+/* ==========================================================================
+   5. HERO SECTION & WIREFRAME WAVE GRAPHIC
+   ========================================================================== */
+.hero-section {
+  background: var(--ink);
+  color: var(--on-dark);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - 20px);
+}
+/* ==========================================================================
+   4. SITE HEADER & NAVIGATION
+   ========================================================================== */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 78px;
+  border-bottom: 1px solid color-mix(in oklch, var(--on-dark) 8%, transparent);
+  position: relative;
+  z-index: 5;
+}
+.logo {
+  font-size: 23px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: inherit;
+}
+.brand-mark {
+  color: var(--teal);
+  font-size: 22px;
+}
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  font-size: 12px;
+}
+.desktop-nav a {
+  color: var(--on-dark);
+}
+.services-menu {
+  position: relative;
+}
+.services-menu summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+}
+.services-menu summary::-webkit-details-marker,
+.mobile-menu summary::-webkit-details-marker {
+  display: none;
+}
+.services-dropdown {
+  position: absolute;
+  top: 31px;
+  left: -24px;
+  width: 310px;
+  padding: 15px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--menu-shadow);
+}
+.services-dropdown a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 8px;
+  color: var(--ink);
+}
+.services-dropdown a:hover {
+  color: var(--primary);
+  background: var(--background);
+}
+.mobile-menu {
+  display: none;
+}
+.hero-heading {
+  padding-top: 68px;
+  z-index: 1;
+}
+.hero-kicker {
+  font-size: 11px !important;
+  color: var(--on-dark);
+  margin-bottom: 19px !important;
+}
+.hero-heading h1 em {
+  font-style: normal;
+  color: var(--primary);
+}
+.waves {
+  position: absolute;
+  left: 0;
+  top: 29%;
+  width: 100%;
+  height: 38%;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 0.8;
+  opacity: 0.22;
+}
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 80px;
+  margin-top: auto;
+  padding-block: 120px 55px;
+  position: relative;
+  z-index: 1;
+}
+.hero-description {
+  max-width: 390px;
+}
+.hero-description > p {
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+.hero-photo {
+  width: 390px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.hero-photo video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.hero-photo::after {
+  content: "";
+  inset: 0;
+  position: absolute;
+  background: var(--footer-scrim);
+  opacity: 0.25;
+}
+.hero-photo figcaption {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 1;
+  font-size: 10px;
+}
+/* ==========================================================================
+   6. ABOUT CUFIA SECTION & CASCADE HEADING
+   ========================================================================== */
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 50px;
+  align-items: start;
+}
+.about-intro h2 {
+  font-size: 36px;
+}
+.cascade-word {
+  display: inline-block;
+}
+.about-actions {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  margin-top: 30px;
+}
+.about-actions p {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  max-width: 170px;
+}
+.about-actions strong {
+  color: var(--teal);
+  font-size: 17px;
+  font-weight: 500;
+}
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.about-cards article {
+  min-height: 300px;
+  background: var(--card);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.about-cards article > svg:not(.waves) {
+  color: var(--teal);
+  background: var(--background);
+  padding: 9px;
+  width: 43px;
+  height: 43px;
+}
+.about-cards h3 {
+  font-size: 23px;
+  margin-bottom: 12px;
+}
+.about-cards p {
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.about-cards .highlight-card {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+.highlight-card p {
+  color: var(--on-dark);
+  opacity: 0.8;
+}
+.highlight-card .waves {
+  width: 160%;
+  height: 75%;
+  top: -12%;
+  left: -40%;
+  transform: rotate(30deg);
+}
+.highlight-card div {
+  position: relative;
+}
+/* ==========================================================================
+   7. SERVICES SECTION & CAROUSEL
+   ========================================================================== */
+.services-section {
+  background: var(--card);
+  padding-block: 75px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.section-heading {
+  margin-bottom: 42px;
+}
+.service-rail {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-inline: 13%;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.service-rail::-webkit-scrollbar {
+  display: none;
+}
+.service-card {
+  flex: 0 0 calc((74vw - 40px) / 3);
+  max-width: 454px;
+  aspect-ratio: 0.88;
+  position: relative;
+  scroll-snap-align: center;
+  color: var(--on-dark);
+  overflow: hidden;
+}
+.service-card::after,
+/* ==========================================================================
+   9. INDUSTRIES & CASE STUDIES
+   ========================================================================== */
+.industry-grid article::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--photo-scrim);
+}
+.service-card-content {
+  position: absolute;
+  bottom: 22px;
+  left: 22px;
+  right: 22px;
+  z-index: 1;
+}
+.photo-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in oklch, var(--on-dark) 30%, transparent);
+  background: color-mix(in oklch, var(--on-dark) 15%, transparent);
+  margin-bottom: 16px;
+}
+.photo-icon svg {
+  width: 19px;
+}
+.service-card h3 {
+  font-size: 24px;
+  margin-bottom: 9px;
+}
+.service-card p {
+  font-size: 12px;
+}
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 23px 0;
+}
+.carousel-controls button {
+  border-radius: 50%;
+  background: var(--background);
+  color: var(--primary);
+  width: 32px;
+  height: 32px;
+}
+.services-bottom {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--muted-foreground);
+}
+.services-bottom p {
+  font-size: 12px;
+}
+.services-bottom a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-size: 12px;
+}
+.rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+/* ==========================================================================
+   8. OUR APPROACH / OPERATING MODEL
+   ========================================================================== */
+.values-section {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+.center-heading {
+  text-align: center;
+}
+.center-heading .eyebrow {
+  justify-content: center;
+}
+.values-section .eyebrow {
+  color: var(--on-dark);
+  opacity: 0.7;
+}
+.center-heading > p:not(.eyebrow) {
+  margin-top: 20px;
+  font-size: 13px;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1.15fr;
+  gap: 16px;
+}
+.value-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
+.value-stack article {
+  padding: 24px;
+  background: var(--dark-surface);
+}
+.value-stack svg {
+  padding: 8px;
+  width: 37px;
+  height: 37px;
+  background: color-mix(in oklch, var(--on-dark) 7%, transparent);
+  margin-bottom: 33px;
+}
+.value-stack h3 {
+  font-size: 23px;
+  margin-bottom: 12px;
+}
+.value-stack p {
+  font-size: 12px;
+  opacity: 0.85;
+}
+.values-photo {
+  min-height: 440px;
+}
+.values-grid.motion-ready {
+  position: relative;
+  display: block;
+}
+.values-grid.motion-ready .value-stack {
+  display: contents;
+}
+.values-grid.motion-ready .value-stack article {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  box-sizing: border-box;
+}
+.values-grid.motion-ready .values-photo {
+  position: absolute;
+  min-height: 0;
+  transform-origin: center;
+  z-index: 1;
+}
+.industry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.industry-grid article {
+  aspect-ratio: 1.32;
+  position: relative;
+  color: var(--on-dark);
+  overflow: hidden;
+}
+.industry-tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  background: color-mix(in oklch, var(--ink) 40%, transparent);
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 11px;
+}
+.industry-grid article > div {
+  position: absolute;
+  left: 25px;
+  bottom: 25px;
+  right: 35px;
+  z-index: 1;
+}
+.industry-grid h3 {
+  max-width: 330px;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+.industry-grid p {
+  font-size: 11px;
+}
+.sector-list {
+  color: var(--muted-foreground);
+  text-align: center;
+  font-size: 12px !important;
+  margin-top: -40px !important;
+}
+.cases-action {
+  display: flex;
+  justify-content: center;
+  margin-top: -42px;
+}
+/* ==========================================================================
+   10. WHY CUFIA / ADVANTAGE STICKY SECTION
+   ========================================================================== */
+.advantage-section {
+  position: relative;
+  height: 260vh;
+  border-bottom: 1px solid var(--border);
+}
+.advantage-layout {
+  position: sticky;
+  top: 0;
+  width: 90%;
+  max-width: 1600px;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.advantage-center {
+  text-align: center;
+  max-width: 540px;
+  width: 32%;
+  position: relative;
+  z-index: 1;
+}
+.advantage-track {
+  position: absolute;
+  top: 0;
+  width: 32%;
+  height: 100%;
+}
+.advantage-track-left {
+  left: 0;
+}
+.advantage-track-right {
+  right: 0;
+}
+.advantage-center .eyebrow {
+  justify-content: center;
+}
+.advantage-center > p:not(.eyebrow) {
+  max-width: 370px;
+  margin: 21px auto 33px;
+  color: var(--muted-foreground);
+}
+.advantage-track .advantage-card {
+  width: 100%;
+  min-height: 360px;
+  padding: 38px;
+  background: var(--primary);
+  color: var(--on-dark);
+  border: 6px solid var(--card);
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+}
+.advantage-card h3 {
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+.advantage-card p {
+  font-size: 14px;
+}
+.advantage-icon {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  margin-bottom: 45px;
+  background: var(--ink);
+  color: var(--teal);
+}
+.advantage-icon svg {
+  width: 20px;
+}
+/* ==========================================================================
+   11. INSIGHTS & ARTICLES SECTION
+   ========================================================================== */
+.insights-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.insight-grid img {
+  aspect-ratio: 1.22;
+  height: auto;
+}
+.article-meta {
+  color: var(--muted-foreground);
+  font-size: 11px !important;
+  margin-block: 18px 10px !important;
+}
+.article-meta span {
+  margin-inline: 7px;
+  color: var(--teal);
+}
+.insight-grid h3 {
+  font-size: 25px;
+}
+/* ==========================================================================
+   12. FAQ ACCORDION SECTION
+   ========================================================================== */
+.faq-section {
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  padding-block: 90px;
+}
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 65px;
+}
+.faq-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 450px;
+}
+.faq-contact {
+  margin-top: 70px;
+}
+.contact-avatar {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  background: var(--background);
+  color: var(--teal);
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+.faq-contact p {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin-bottom: 15px;
+}
+.faq-list details {
+  padding: 21px 18px;
+}
+.faq-list details[open] {
+  background: var(--background);
+}
+.faq-list summary {
+  font-size: 14px;
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+.faq-list details p {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  padding-top: 18px;
+  padding-right: 24px;
+}
+.faq-toggle {
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background: var(--teal);
+  color: var(--on-dark);
+  display: grid;
+  place-items: center;
+}
+.faq-toggle::before {
+  content: "+";
+  font-size: 14px;
+  line-height: 1;
+}
+details[open] .faq-toggle::before {
+  content: "×";
+}
+/* ==========================================================================
+   13. FOOTER SECTION
+   ========================================================================== */
+.footer-section {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+.footer-inner {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.footer-cta {
+  position: relative;
+  min-height: 440px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 80px 30px;
+  overflow: hidden;
+}
+.footer-cta > img {
+  position: absolute;
+  inset: 0;
+}
+.footer-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--footer-scrim);
+}
+.footer-cta > div {
+  position: relative;
+  z-index: 1;
+}
+.footer-cta h2 {
+  font-size: 46px;
+}
+.footer-cta > div > p {
+  margin-top: 22px;
+  opacity: 0.85;
+}
+.footer-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 32px;
+}
+.footer-cta-row p {
+  font-size: 11px;
+  text-align: left;
+  opacity: 0.8;
+}
+.footer-cta-row strong {
+  color: var(--teal);
+  font-size: 17px;
+}
+.footer-columns {
+  display: grid;
+  grid-template-columns: 1.65fr 1.3fr 0.8fr 0.8fr;
+  gap: 40px;
+  padding: 60px 25px;
+  border-top: 1px solid color-mix(in oklch, var(--on-dark) 9%, transparent);
+  flex: 1;
+}
+.footer-columns h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0.65;
+}
+.footer-columns h3 {
+  font-family: var(--font-sans);
+  font-size: 19px;
+  max-width: 280px;
+}
+.footer-columns p {
+  opacity: 0.65;
+  font-size: 13px;
+  margin-top: 15px;
+}
+.footer-columns a:not(.logo) {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 9px;
+  opacity: 0.85;
+}
+.footer-logo {
+  margin-top: 25px;
+}
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 27px 25px;
+  border-top: 1px solid color-mix(in oklch, var(--on-dark) 9%, transparent);
+}
+.footer-bottom p,
+.footer-bottom a {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.footer-bottom a {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+/* ==========================================================================
+   14. RESPONSIVE BREAKPOINTS (DESKTOP, TABLET, MOBILE)
+   ========================================================================== */
+@media (min-width: 1600px) {
+  .cufia-page h1 {
+    font-size: 100px;
+  }
+  .cufia-page h2 {
+    font-size: 53px;
+  }
+  .about-intro h2 {
+    font-size: 45px;
+  }
+  .hero-heading {
+    padding-top: 80px;
+  }
+  .hero-bottom {
+    padding-bottom: 65px;
+  }
+  .about-cards article {
+    min-height: 380px;
+  }
+  .value-stack article {
+    padding: 30px;
+  }
+  .values-photo {
+    min-height: 550px;
+  }
+}
+@media (max-width: 1050px) {
+  .wrap {
+    width: 84%;
+  }
+  .desktop-nav {
+    gap: 20px;
+  }
+  .cufia-page h1 {
+    font-size: 61px;
+  }
+  .cufia-page h2 {
+    font-size: 36px;
+  }
+  .about-intro {
+    gap: 25px;
+    grid-template-columns: 1fr 2.5fr;
+  }
+  .about-intro h2 {
+    font-size: 32px;
+  }
+  .service-rail {
+    padding-inline: 8%;
+  }
+  .service-card {
+    flex-basis: calc((84vw - 40px) / 3);
+  }
+  .service-card h3 {
+    font-size: 21px;
+  }
+  .values-grid {
+    gap: 12px;
+  }
+  .value-stack article {
+    padding: 18px;
+  }
+  .value-stack h3 {
+    font-size: 20px;
+  }
+  .advantage-card {
+    padding: 22px;
+    width: 30%;
+  }
+  .advantage-center h2 {
+    font-size: 34px;
+  }
+  .footer-columns {
+    gap: 25px;
+  }
+}
+@media (max-width: 700px) {
+  .wrap {
+    width: 88%;
+  }
+  .cufia-page h1 {
+    font-size: 43px;
+  }
+  .cufia-page h2 {
+    font-size: 33px;
+  }
+  .cufia-page h3 {
+    font-size: 22px;
+  }
+  .section-inner {
+    padding-block: 65px;
+    gap: 45px;
+  }
+  .site-header {
+    height: 72px;
+    gap: 15px;
+  }
+  .site-header > .cufia-cta {
+    margin-left: auto;
+    height: 37px;
+    padding-left: 12px;
+    gap: 12px;
+  }
+  .site-header > .cufia-cta span {
+    height: 26px;
+    width: 26px;
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-menu {
+    display: block;
+  }
+  .mobile-menu summary {
+    cursor: pointer;
+    list-style: none;
+  }
+  .mobile-menu nav {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 285px;
+    max-height: 75vh;
+    overflow: auto;
+    background: var(--card);
+    color: var(--ink);
+    padding: 20px;
+    box-shadow: var(--menu-shadow);
+  }
+  .mobile-menu a {
+    display: block;
+    padding: 9px;
+    font-size: 14px;
+  }
+  .mobile-menu .mobile-service {
+    font-size: 12px;
+    color: var(--primary);
+    padding-left: 22px;
+  }
+  .hero-heading {
+    padding-top: 55px;
+  }
+  .hero-kicker {
+    font-size: 9px !important;
+  }
+  .hero-heading br {
+    display: none;
+  }
+  .hero-bottom {
+    align-items: flex-start;
+    gap: 30px;
+    padding-block: 100px 42px;
+    flex-direction: column;
+  }
+  .hero-description {
+    max-width: 100%;
+  }
+  .hero-description > p {
+    font-size: 13px;
+  }
+  .hero-photo {
+    width: 53%;
+    align-self: flex-end;
+  }
+  .waves {
+    top: 28%;
+    height: 33%;
+  }
+  .about-intro {
+    display: block;
+  }
+  .about-intro h2 {
+    font-size: 31px;
+  }
+  .about-actions {
+    gap: 18px;
+  }
+  .about-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .about-cards article {
+    min-height: 220px;
+    padding: 25px;
+  }
+  .about-cards h3 {
+    font-size: 24px;
+  }
+  .services-section {
+    padding-block: 60px 40px;
+  }
+  .service-rail {
+    padding-inline: 6%;
+    gap: 14px;
+  }
+  .service-card {
+    flex-basis: 76vw;
+    max-width: none;
+  }
+  .service-card h3 {
+    font-size: 27px;
+  }
+  .service-card p {
+    font-size: 13px;
+  }
+  .services-bottom {
+    flex-wrap: wrap;
+  }
+  .services-bottom .rule {
+    display: none;
+  }
+  .services-bottom a {
+    margin-left: auto;
+  }
+  .values-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .values-photo {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 350px !important;
+    min-height: 0;
+    object-position: center 32%;
+  }
+  .value-stack {
+    gap: 12px;
+  }
+  .value-stack article {
+    padding: 18px;
+  }
+  .value-stack h3 {
+    font-size: 21px;
+    overflow-wrap: anywhere;
+  }
+  .value-stack svg {
+    margin-bottom: 25px;
+  }
+  .value-stack p {
+    font-size: 11px;
+  }
+  .industry-grid {
+    grid-template-columns: 1fr;
+  }
+  .industry-grid article {
+    aspect-ratio: 1.12;
+  }
+  .industry-grid h3 {
+    font-size: 26px;
+  }
+  .sector-list {
+    margin-top: -15px !important;
+  }
+  .advantage-layout {
+    padding-block: 40px;
+    flex-direction: column;
+    gap: 38px;
+  }
+  .advantage-card {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 62%;
+    min-height: 240px;
+    padding: 22px;
+  }
+  .commercial {
+    align-self: flex-start;
+  }
+  .tailored {
+    align-self: flex-end;
+  }
+  .advantage-center {
+    width: 100%;
+  }
+  .advantage-center h2 {
+    font-size: 33px;
+  }
+  .advantage-icon {
+    margin-bottom: 28px;
+  }
+  .insights-heading {
+    gap: 25px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .insight-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .insight-grid h3 {
+    font-size: 26px;
+  }
+  .insight-grid img {
+    aspect-ratio: 1.3;
+  }
+  .faq-section {
+    padding-block: 65px;
+  }
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+  .faq-left {
+    min-height: 0;
+  }
+  .faq-contact {
+    margin-top: 35px;
+  }
+  .faq-list details {
+    padding: 21px 15px;
+  }
+  .footer-inner {
+    width: 100%;
+  }
+  .footer-cta {
+    min-height: 470px;
+    padding-inline: 6%;
+  }
+  .footer-cta h2 {
+    font-size: 35px;
+  }
+  .footer-cta-row {
+    gap: 18px;
+  }
+  .footer-columns {
+    grid-template-columns: 1.3fr 1fr;
+    padding: 45px 6%;
+    gap: 40px 22px;
+  }
+  .footer-message {
+    grid-column: 1/-1;
+  }
+  .footer-columns > div:last-child {
+    grid-column: 2;
+  }
+  .footer-bottom {
+    padding: 25px 6%;
+    gap: 15px;
+  }
+  .footer-bottom p {
+    font-size: 10px;
+  }
+}
+@media (max-width: 1050px) and (min-width: 701px) {
+  .advantage-track .advantage-card {
+    padding: 18px;
+  }
+  .advantage-card h3 {
+    font-size: 21px;
+  }
+  .advantage-center h2 {
+    font-size: 30px;
+  }
+}
+@media (max-width: 700px) {
+  .cases-action {
+    margin-top: -15px;
+  }
+  .advantage-section {
+    height: auto;
+  }
+  .advantage-layout {
+    height: auto;
+    min-height: 100svh;
+  }
+  .advantage-center {
+    width: 100%;
+  }
+  .advantage-track {
+    position: relative;
+    width: 100%;
+    gap: 22px;
+  }
+  .advantage-track .advantage-card {
+    width: 100%;
+    min-height: 240px;
+    padding: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .advantage-section {
+    height: auto;
+  }
+  .advantage-layout {
+    height: auto;
+    min-height: 100svh;
+    padding-block: 80px;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .advantage-center {
+    width: 100%;
+    max-width: none;
+  }
+  .advantage-track {
+    position: relative;
+    width: calc(50% - 20px);
+    gap: 24px;
+  }
+}
+@media (max-width: 700px), (prefers-reduced-motion: reduce) {
+  .advantage-track {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .advantage-track .advantage-card {
+    position: relative;
+  }
+  .advantage-layout {
+    overflow: visible;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  } /* .hero-section > .waves animated via harmonic path modulation */
+  @keyframes wave-drift {
+    to {
+      transform: translateY(15px);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* ==========================================================================
+   15. SCROLL REVEALS & MICRO-INTERACTION ANIMATIONS
+   ========================================================================== */
+/* Enhanced High-Energy Scroll Transitions & Dynamic Micro-Interactions */
+html.js-ready .reveal-item {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+html.js-ready .reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+html.js-ready .reveal-zoom {
+  opacity: 0;
+  transform: scale(0.92) translateY(40px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+html.js-ready .reveal-zoom.is-revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+html.js-ready .reveal-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+html.js-ready .reveal-fade.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+.reveal-delay-5 {
+  transition-delay: 0.5s;
+}
+
+/* Interactive Hover States & Tactile Depth */
+.service-card,
+.industry-grid article,
+.about-cards article,
+.insight-grid article,
+.faq-list details {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
+}
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 36px -12px rgba(10, 20, 28, 0.35);
+}
+.industry-grid article:hover {
+  transform: translateY(-7px) scale(1.01);
+  box-shadow: 0 24px 44px -14px rgba(10, 20, 28, 0.4);
+}
+.about-cards article:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -10px rgba(10, 20, 28, 0.12);
+}
+.insight-grid article:hover {
+  transform: translateY(-6px);
+}
+.insight-grid article img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.insight-grid article:hover img {
+  transform: scale(1.05);
+}
+.faq-list details:hover {
+  background: var(--background);
+}
+.cufia-cta {
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.2s ease,
+    box-shadow 0.25s ease;
+}
+.cufia-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -4px rgba(10, 20, 28, 0.2);
+}
+.cufia-cta svg {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cufia-cta:hover svg {
+  transform: translate(3px, -3px);
+}
+
+/* Hero Wireframe Wave Graphic Styling */
+.hero-section > .waves {
+  will-change: transform;
+}
+.hero-section > .waves path {
+  will-change: d;
+}
+
+.cascade-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+  transition: color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-ready .reveal-item,
+  html.js-ready .reveal-zoom,
+  html.js-ready .reveal-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .service-card:hover,
+  .industry-grid article:hover,
+  .about-cards article:hover,
+  .insight-grid article:hover,
+  .cufia-cta:hover {
+    transform: none !important;
+  }
+  .waves.is-revealed {
+    animation: none !important;
+  }
+  .hero-section > .waves {
+    transform: none !important;
+  }
+}
