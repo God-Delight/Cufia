@@ -1529,3 +1529,133 @@ html.js-ready .reveal-fade.is-revealed {
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   SERVICES PAGE (services.html) — scoped under .services-page
+   ========================================================================== */
+.svc-hero {
+  position: relative;
+  background: var(--ink);
+  color: var(--on-dark);
+  min-height: 62svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.svc-hero > .waves { top: 18%; height: 42%; }
+.svc-hero-inner {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 120px;
+  padding-bottom: 72px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+  gap: 64px;
+  align-items: end;
+}
+.svc-hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(40px, 4.6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  max-width: 17ch;
+}
+.svc-hero-copy {
+  font-size: 15px;
+  line-height: 1.6;
+  color: color-mix(in oklch, var(--on-dark) 82%, transparent);
+  max-width: 420px;
+  justify-self: end;
+}
+.svc-grid-section { padding: 120px 0; background: var(--background); }
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 64px 24px;
+}
+.svc-card { scroll-margin-top: 100px; }
+.svc-card-photo {
+  position: relative;
+  aspect-ratio: 1 / 0.97;
+  overflow: hidden;
+  background: var(--dark-surface);
+}
+.svc-card-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.svc-card:hover .svc-card-photo img { transform: scale(1.04); }
+.svc-card-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--photo-scrim); pointer-events: none;
+}
+.svc-icon {
+  position: absolute; left: 24px; bottom: 24px; z-index: 1;
+  width: 54px; height: 54px; display: grid; place-items: center;
+  color: var(--on-dark);
+  border: 1px solid color-mix(in oklch, var(--on-dark) 30%, transparent);
+  background: color-mix(in oklch, var(--on-dark) 12%, transparent);
+  backdrop-filter: blur(6px);
+}
+.svc-icon svg { width: 22px; height: 22px; }
+.svc-card h3 {
+  font-family: var(--font-heading); font-weight: 400;
+  font-size: 26px; line-height: 1.2; margin: 26px 4px 10px;
+}
+.svc-card p { font-size: 15px; line-height: 1.6; color: var(--muted-foreground); margin: 0 4px; max-width: 40ch; }
+.svc-why { background: var(--card); border-top: 1px solid var(--border); display: flex; align-items: center; }
+.svc-why-inner {
+  display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 96px; align-items: center;
+}
+.services-page h2 {
+  font-family: var(--font-heading); font-weight: 400;
+  font-size: clamp(38px, 4.2vw, 62px); line-height: 1.08; letter-spacing: -0.02em;
+  margin: 22px 0 26px; max-width: 13ch;
+}
+.svc-lead { font-size: 16px; line-height: 1.65; color: var(--muted-foreground); max-width: 46ch; }
+.svc-why-photo { border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 10; }
+.svc-why-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.svc-testimonials { background: var(--card); padding: 40px 0 140px; }
+.svc-testimonials-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 56px; }
+.svc-testimonials h2 { max-width: none; margin-bottom: 18px; }
+.svc-carousel-buttons { display: flex; gap: 12px; }
+.svc-carousel-buttons button {
+  width: 56px; height: 56px; border-radius: 999px; display: grid; place-items: center;
+  background: var(--secondary); color: var(--ink); transition: background 0.2s, color 0.2s;
+}
+.svc-carousel-buttons button:hover { background: var(--primary); color: var(--primary-foreground); }
+.svc-testimonial-rail {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 60px) / 3);
+  gap: 30px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.svc-testimonial-rail::-webkit-scrollbar { display: none; }
+.svc-testimonial {
+  position: relative; scroll-snap-align: start; border-radius: 16px; overflow: hidden;
+  aspect-ratio: 0.72; background: var(--dark-surface); color: var(--on-dark);
+}
+.svc-testimonial > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.svc-testimonial::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 30%, oklch(0.192 0.026 264 / 0.7) 55%, oklch(0.192 0.026 264 / 0.97) 85%);
+}
+.svc-testimonial > div { position: absolute; z-index: 1; left: 32px; right: 32px; bottom: 32px; }
+.svc-quote-mark { color: var(--cta); margin-bottom: 16px; }
+.svc-testimonial blockquote { margin: 0 0 18px; font-size: 16px; line-height: 1.5; }
+.svc-testimonial p { font-size: 13px; color: color-mix(in oklch, var(--on-dark) 72%, transparent); }
+@media (max-width: 1050px) {
+  .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .svc-why-inner { grid-template-columns: 1fr; gap: 48px; }
+  .svc-testimonial-rail { grid-auto-columns: 62%; }
+  .svc-hero-inner { grid-template-columns: 1fr; gap: 28px; }
+  .svc-hero-copy { justify-self: start; }
+}
+@media (max-width: 700px) {
+  .svc-grid { grid-template-columns: 1fr; gap: 48px; }
+  .svc-grid-section { padding: 72px 0; }
+  .svc-testimonial-rail { grid-auto-columns: 86%; }
+  .svc-testimonials-head { flex-direction: column; align-items: start; }
+  .svc-why { padding: 80px 0; }
+}

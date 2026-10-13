@@ -252,7 +252,7 @@ setupCufiaScrollMotion(document.querySelector(".cufia-page"));
  * ------------------------------------------------------------------------------
  */
 function setupHeroWaveMotion() {
-  const svg = document.querySelector(".hero-section > svg.waves");
+  const svg = document.querySelector(".hero-section > svg.waves, .svc-hero > svg.waves");
   if (!svg) return;
   const paths = Array.from(svg.querySelectorAll("path"));
   if (!paths.length) return;
@@ -364,3 +364,21 @@ function setupHeroWaveMotion() {
   });
 }
 setupHeroWaveMotion();
+
+/**
+ * ------------------------------------------------------------------------------
+ * 7. Services Page: Testimonials Carousel (runs only where the rail exists)
+ * ------------------------------------------------------------------------------
+ */
+function setupTestimonialsCarousel() {
+  const rail = document.querySelector(".svc-testimonial-rail");
+  if (!rail) return;
+  document.querySelectorAll("[data-testimonial]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = rail.querySelector(".svc-testimonial");
+      const step = card ? card.getBoundingClientRect().width + 30 : rail.clientWidth;
+      rail.scrollBy({ left: step * Number(btn.dataset.testimonial), behavior: "smooth" });
+    });
+  });
+}
+setupTestimonialsCarousel();
