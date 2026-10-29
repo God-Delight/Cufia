@@ -479,7 +479,7 @@ details:not([open]) > :not(summary) {
    ========================================================================== */
 .services-section {
   background: var(--card);
-  padding-block: 75px 45px;
+  padding-block: 110px 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -548,26 +548,27 @@ details:not([open]) > :not(summary) {
   align-items: flex-end;
   justify-content: space-between;
   gap: 32px;
-  margin-bottom: 48px; /* Breathing room before the carousel cards */
+  margin-bottom: 64px; /* Breathing room before the carousel cards */
 }
 .services-header-left {
-  max-width: 620px;
+  max-width: 640px;
 }
 .services-header-left h2 {
   margin: 0;
 }
-.services-subheading {
-  font-size: 21px;          /* bumped up from 17px */
+.cufia-page .services-subheading {
+  font-size: 21px;
   line-height: 1.55;
   color: #0c0c0c;
   max-width: 620px;
-  margin-top: 22px;         /* gives the H2 room to breathe */
+  margin-top: 24px;         /* gives the H2 room to breathe */
+  margin-bottom: 0;
 }
 .services-header-right {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Keeps arrows aligned with the CTA */
-  gap: 20px; /* Space between the CTA button and the arrow buttons */
+  flex-direction: row-reverse; /* CTA on the right, arrows on the left */
+  align-items: center;         /* Pill and circles share one centre line */
+  gap: 20px;                   /* Space between the arrow buttons and the CTA */
   flex-shrink: 0;
 }
 .carousel-controls {
@@ -580,8 +581,8 @@ details:not([open]) > :not(summary) {
   border-radius: 50%;
   background: var(--background);
   color: var(--primary);
-  width: 36px;
-  height: 36px;
+  width: 43px;  /* matches the CTA pill height */
+  height: 43px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -617,57 +618,151 @@ details:not([open]) > :not(summary) {
   margin-top: 20px;
   font-size: 13px;
 }
-.values-grid {
+/* ---- Values: connoisseur stack interactor ---- */
+.values-section .section-inner {
+  gap: 56px;
+}
+.values-stage {
   display: grid;
-  grid-template-columns: 1.15fr 1fr 1.15fr;
-  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
 }
-.value-stack {
+.values-content {
+  position: relative;
+  z-index: 2;
+}
+.values-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(26px, 3vw, 44px);
+}
+.value-item {
+  cursor: pointer;
+}
+.cufia-page .value-heading {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+.value-trigger {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.value-trigger:focus-visible {
+  outline: 2px solid var(--cta);
+  outline-offset: 6px;
+}
+.value-number {
+  flex-shrink: 0;
+  width: 40px;
+  margin-top: 8px;
+  font-family: var(--font-sans);
+  font-size: clamp(20px, 1.9vw, 28px);
+  font-weight: 700;
+  line-height: 1;
+  color: color-mix(in oklch, var(--on-dark) 45%, transparent);
+  transform-origin: left center;
+  transition: all 0.5s ease;
+}
+.value-item.is-active .value-number {
+  color: var(--cta);
+  transform: scale(1.1);
+}
+.value-title {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(32px, 3.6vw, 54px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in oklch, var(--on-dark) 90%, transparent);
+  opacity: 0.4;
+  transform: translateX(0);
+  transition: all 0.7s ease;
+}
+.value-item.is-active .value-title {
+  color: var(--on-dark);
+  -webkit-text-stroke: 0 transparent;
+  opacity: 1;
+  transform: translateX(16px);
+}
+.value-item:not(.is-active):hover .value-title {
+  opacity: 0.6;
+}
+.values-detail {
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 16px;
+  margin-top: 40px;
+  padding-left: 64px; /* lines up with the titles */
 }
-.value-stack article {
-  padding: 24px;
-  background: var(--dark-surface);
+.cufia-page .value-panel {
+  grid-area: 1 / 1;
+  max-width: 460px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    visibility 0s linear 0.45s;
 }
-.value-stack svg {
-  padding: 8px;
-  width: 37px;
-  height: 37px;
-  background: color-mix(in oklch, var(--on-dark) 7%, transparent);
-  margin-bottom: 33px;
+.cufia-page .value-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.45s ease 0.1s,
+    transform 0.45s ease 0.1s,
+    visibility 0s;
 }
-.value-stack h3 {
-  font-size: 23px;
-  margin-bottom: 12px;
-}
-.value-stack p {
-  font-size: 12px;
+.cufia-page .value-panel p {
+  font-size: 15px;
+  line-height: 1.65;
   opacity: 0.85;
 }
-.values-photo {
-  min-height: 440px;
-}
-.values-grid.motion-ready {
+.values-media {
   position: relative;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
-.values-grid.motion-ready .value-stack {
-  display: contents;
-}
-.values-grid.motion-ready .value-stack article {
+.values-glow {
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  box-sizing: border-box;
+  width: 120%;
+  height: 120%;
+  background: rgba(249, 115, 22, 0.1);
+  filter: blur(120px);
+  border-radius: 50%;
+  pointer-events: none;
 }
-.values-grid.motion-ready .values-photo {
-  position: absolute;
-  min-height: 0;
-  transform-origin: center;
+.values-svg {
+  position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.8));
+}
+@media (prefers-reduced-motion: reduce) {
+  .value-number,
+  .value-title,
+  .cufia-page .value-panel {
+    transition: none;
+  }
 }
 .industry-grid {
   display: grid;
@@ -1032,12 +1127,6 @@ details[open] .faq-toggle::before {
   .about-cards article {
     min-height: 380px;
   }
-  .value-stack article {
-    padding: 30px;
-  }
-  .values-photo {
-    min-height: 550px;
-  }
 }
 @media (max-width: 1050px) {
   .wrap {
@@ -1073,15 +1162,6 @@ details[open] .faq-toggle::before {
   }
   .service-card h3 {
     font-size: 21px;
-  }
-  .values-grid {
-    gap: 12px;
-  }
-  .value-stack article {
-    padding: 18px;
-  }
-  .value-stack h3 {
-    font-size: 20px;
   }
   .advantage-card {
     padding: 22px;
@@ -1206,7 +1286,7 @@ details[open] .faq-toggle::before {
     font-size: 24px;
   }
   .services-section {
-    padding-block: 60px 40px;
+    padding-block: 72px 56px;
   }
   .service-rail {
     padding-inline: 6%;
@@ -1226,7 +1306,7 @@ details[open] .faq-toggle::before {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
-    margin-bottom: 60px;
+    margin-bottom: 32px;
   }
 
   .services-header-right {
@@ -1235,34 +1315,31 @@ details[open] .faq-toggle::before {
     align-items: center;
     justify-content: space-between;
   }
+  .cufia-page .services-subheading {
+    font-size: 17px;    /* Keeps mobile compact and clean */
+    margin-top: 16px;
+  }
 
-
-  .values-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  .values-stage {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
-  .values-photo {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    height: 350px !important;
-    min-height: 0;
-    object-position: center 32%;
+  .value-trigger {
+    gap: 16px;
   }
-  .value-stack {
-    gap: 12px;
+  .value-number {
+    width: 32px;
+    margin-top: 4px;
   }
-  .value-stack article {
-    padding: 18px;
+  .value-title {
+    font-size: 30px;
   }
-  .value-stack h3 {
-    font-size: 21px;
-    overflow-wrap: anywhere;
+  .values-detail {
+    margin-top: 28px;
+    padding-left: 48px;
   }
-  .value-stack svg {
-    margin-bottom: 25px;
-  }
-  .value-stack p {
-    font-size: 11px;
+  .cufia-page .value-panel p {
+    font-size: 14px;
   }
   .industry-grid {
     grid-template-columns: 1fr;

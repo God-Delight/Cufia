@@ -10,8 +10,7 @@
  *  5. Scroll-Linked Interactive Sections:
  *     - Why Cufia: Native Sticky Card Stacking & Staggered Transitions
  *     - About Section: Progressive Word-by-Word Blur & Slide Cascade Heading
- *     - Our Approach: Responsive Card Split & Central Photo Reveal
- *  6. Hero Wireframe Wave: Real-time Harmonic Bézier Undulation Engine
+ * *  6. Hero Wireframe Wave: Real-time Harmonic Bézier Undulation Engine
  * ==============================================================================
  */
 
@@ -217,17 +216,12 @@ setupNavigationMenus();
  * 5. Scroll-Linked Interactive Sections
  *    - Why Cufia: Sticky stage & track card progression
  *    - About Section: Progressive blur & slide cascade heading
- *    - Our Approach: Interactive stack split & center photo reveal
  * ------------------------------------------------------------------------------
  */
 function setupCufiaScrollMotion(root) {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   const words = Array.from(root.querySelectorAll(".cascade-word"));
   const heading = root.querySelector(".cascade-heading");
-  const section = root.querySelector(".values-section");
-  const grid = root.querySelector(".values-grid");
-  const cards = Array.from(root.querySelectorAll(".value-stack article"));
-  const photo = root.querySelector(".values-photo");
   const advantage = root.querySelector(".advantage-section");
   const stage = root.querySelector(".advantage-layout");
   const tracks = Array.from(root.querySelectorAll(".advantage-track"));
@@ -298,43 +292,6 @@ function setupCufiaScrollMotion(root) {
         word.style.filter = `blur(${(1 - smoothP) * 4}px)`;
       });
     }
-    if (!section || !grid || !photo || cards.length !== 4) return;
-    const box = grid.getBoundingClientRect();
-    const raw = reduced.matches
-      ? 1
-      : clamp(
-          (window.innerHeight * 0.92 - box.top) / (window.innerHeight * 0.45),
-        );
-    const p = raw * raw * (3 - 2 * raw);
-    const width = grid.clientWidth;
-    const mobile = window.innerWidth <= 700;
-    const gap = mobile ? 12 : 16;
-    const startW = mobile ? (width - gap) / 2 : (width - gap * 3) / 4;
-    const endW = mobile ? startW : ((width - gap * 2) * 1.15) / 3.3;
-    const centerW = width - endW * 2 - gap * 2;
-    const cardH = Math.max(230, ...cards.map((card) => card.scrollHeight));
-    const totalH = mobile ? cardH * 2 + gap + 350 + gap : cardH * 2 + gap;
-    const stackProgress = clamp(p / 0.45);
-    const splitProgress = clamp((p - 0.45) / 0.55);
-    grid.style.height = `${totalH}px`;
-    cards.forEach((card, i) => {
-      const startX = mobile ? (i % 2) * (startW + gap) : i * (startW + gap);
-      const startY = mobile
-        ? Math.floor(i / 2) * (cardH + gap)
-        : (totalH - cardH) / 2;
-      const endX = i < 2 ? 0 : width - endW;
-      const endY = (i % 2) * (cardH + gap);
-      card.style.width = `${mix(startW, endW, splitProgress)}px`;
-      card.style.minHeight = `${cardH}px`;
-      card.style.transform = `translate(${mix(startX, endX, mobile ? p : splitProgress)}px, ${mix(startY, endY, mobile ? p : stackProgress)}px)`;
-    });
-    photo.style.width = `${mobile ? width : centerW}px`;
-    photo.style.height = `${mobile ? 350 : totalH}px`;
-    photo.style.left = `${mobile ? 0 : endW + gap}px`;
-    photo.style.top = `${mobile ? cardH * 2 + gap * 2 : 0}px`;
-    photo.style.opacity = String(splitProgress);
-    photo.style.transform = `translateY(${(1 - p) * 45}px) scale(${mix(0.78, 1, p)})`;
-    grid.classList.add("motion-ready");
   }
   function requestUpdate() {
     if (!frame) frame = window.requestAnimationFrame(update);
@@ -352,6 +309,135 @@ function setupCufiaScrollMotion(root) {
 }
 
 setupCufiaScrollMotion(document.querySelector(".cufia-page"));
+
+/**
+ * ------------------------------------------------------------------------------
+ * 5b. Our Values: Connoisseur Stack Interactor
+ *     Hover (desktop), tap (touch) or focus (keyboard) a value and its photo is
+ *     revealed through animated clip-path shapes that grow in, breathe, shrink
+ *     away and loop. Needs GSAP (loaded in index.html); without it the photo
+ *     simply swaps with no animation.
+ * ------------------------------------------------------------------------------
+ */
+function setupValuesStack() {
+  const list = document.querySelector(".values-list");
+  const image = document.getElementById("values-image");
+  const group = document.getElementById("values-clip-group");
+  if (!list || !image || !group) return;
+
+  const items = Array.from(list.querySelectorAll(".value-item"));
+  const panels = Array.from(document.querySelectorAll(".values-detail .value-panel"));
+  const triggers = items.map((item) => item.querySelector(".value-trigger"));
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const hasGsap = typeof window.gsap !== "undefined";
+
+  let activeIndex = 0;
+  let timeline = null;
+  let visible = true;
+
+  // Preload every photo so switching never flashes
+  items.forEach((item) => {
+    const img = new Image();
+    img.src = item.dataset.image;
+  });
+
+  function createLoop(index) {
+    const { image: src, clip } = items[index].dataset;
+    const selector = `#${clip} .path`;
+
+    if (timeline) timeline.kill();
+
+    image.setAttribute("href", src);
+    group.setAttribute("clip-path", `url(#${clip})`);
+
+    if (!hasGsap || reduced.matches) {
+      // No animation: show the shapes at full size
+      if (hasGsap) window.gsap.set(selector, { scale: 1, transformOrigin: "50% 50%" });
+      return;
+    }
+
+    const gsap = window.gsap;
+    gsap.set(selector, { scale: 0, transformOrigin: "50% 50%" });
+
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+    // 1. IN (expo out)
+    tl.to(selector, {
+      scale: 1,
+      duration: 0.8,
+      stagger: { amount: 0.4, from: "random" },
+      ease: "expo.out",
+    })
+      // 2. IDLE (sine breath)
+      .to(selector, {
+        scale: 1.05,
+        duration: 1.5,
+        yoyo: true,
+        repeat: 1,
+        ease: "sine.inOut",
+        stagger: { amount: 0.2, from: "center" },
+      })
+      // 3. OUT (expo in)
+      .to(selector, {
+        scale: 0,
+        duration: 0.6,
+        stagger: { amount: 0.3, from: "edges" },
+        ease: "expo.in",
+      });
+
+    if (!visible) tl.pause();
+    timeline = tl;
+  }
+
+  function activate(index) {
+    if (index === activeIndex) return;
+    activeIndex = index;
+    items.forEach((item, i) => {
+      const on = i === index;
+      item.classList.toggle("is-active", on);
+      triggers[i].setAttribute("aria-expanded", String(on));
+    });
+    panels.forEach((panel, i) => panel.classList.toggle("is-active", i === index));
+    createLoop(index);
+  }
+
+  items.forEach((item, i) => {
+    item.addEventListener("mouseenter", () => {
+      if (canHover.matches) activate(i);
+    });
+    triggers[i].addEventListener("click", () => activate(i));
+    triggers[i].addEventListener("focus", () => activate(i));
+  });
+
+  // Up / Down arrows move between values
+  list.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    const current = triggers.indexOf(document.activeElement);
+    if (current === -1) return;
+    e.preventDefault();
+    const step = e.key === "ArrowDown" ? 1 : -1;
+    triggers[(current + step + triggers.length) % triggers.length].focus();
+  });
+
+  // Pause the loop while the section is off-screen
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(
+      (entries) => {
+        visible = entries[0].isIntersecting;
+        if (!timeline) return;
+        if (visible) timeline.play();
+        else timeline.pause();
+      },
+      { threshold: 0.05 },
+    ).observe(document.querySelector(".values-media"));
+  }
+
+  reduced.addEventListener("change", () => createLoop(activeIndex));
+
+  createLoop(0);
+}
+setupValuesStack();
 
 /**
  * ------------------------------------------------------------------------------
