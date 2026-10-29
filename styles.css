@@ -3,47 +3,54 @@
    ========================================================================== */
 :root {
   --radius: 0.25rem;
-  --background: oklch(0.97845987 0.00453078 258.324487);
-  --foreground: oklch(0.1915161 0.02622837 263.65753754);
+  --background: #f6f8fb;
+  --foreground: #0c0c0c;
   --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.57410462 0.20152 261.99624584);
+  --primary: #2f6fed;
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.943 0.011 250);
   --secondary-foreground: var(--foreground);
   --muted: var(--secondary);
   --muted-foreground: oklch(0.49 0.023 250);
-  --accent: oklch(0.69637686 0.12046241 185.71061272);
-  --accent-foreground: var(--foreground);
+  --accent: #2f6fed;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.912 0.013 250);
   --input: var(--border);
   --ring: var(--primary);
-  --ink: oklch(0.1915161 0.02622837 263.65753754);
-  --on-dark: oklch(0.97845987 0.00453078 258.324487);
-  --dark-surface: oklch(0.25 0.032 256);
-  --teal: oklch(0.69637686 0.12046241 185.71061272);
-  --cta: oklch(0.80691818 0.16622794 81.75375212);
+  --ink: #0c0c0c;
+  --on-dark: #f6f8fb;
+  --dark-surface: #042a76;
+  --teal: #2f6fed;
+  --cta: #ffa552;
   --cta-foreground: var(--ink);
   --photo-scrim: linear-gradient(
     180deg,
     transparent 30%,
-    oklch(0.192 0.026 264 / 0.92) 100%
+    rgba(4, 42, 118, 0.92) 100%
   );
   --footer-scrim: linear-gradient(
     180deg,
-    oklch(0.192 0.026 264 / 0.42),
-    oklch(0.192 0.026 264 / 0.96)
+    rgba(4, 42, 118, 0.42),
+    rgba(4, 42, 118, 0.96)
   );
-  --menu-shadow: 0 12px 32px oklch(0.192 0.026 264 / 0.22);
+  --menu-shadow: 0 12px 32px rgba(4, 42, 118, 0.22);
+
+  /* ---- Cufia brand palette (HEX) ---- */
+  --imperial-blue: #042a76;
+  --digital-blue: #2f6fed;
+  --sandy-brown: #ffa552;
+  --platinum: #f6f8fb;
+  --text-ink: #0c0c0c;
 }
 
 :root {
   --font-sans: Inter, sans-serif;
-  --font-heading: Fraunces, Georgia, serif;
+  --font-heading: Merriweather, Georgia, serif;
 }
 /* ==========================================================================
    2. GLOBAL RESETS & BASE TYPOGRAPHY
@@ -72,6 +79,9 @@ button {
 }
 svg {
   display: block;
+}
+svg[hidden] {
+  display: none;
 }
 details:not([open]) > :not(summary) {
   display: none;
@@ -169,7 +179,7 @@ details:not([open]) > :not(summary) {
   white-space: nowrap;
   background: var(--cta);
   color: var(--cta-foreground);
-  border-radius: 0;
+  border-radius: 999px;
   box-shadow: none;
   height: 43px;
   padding: 5px 5px 5px 20px;
@@ -186,12 +196,13 @@ details:not([open]) > :not(summary) {
   place-items: center;
   width: 31px;
   height: 31px;
+  border-radius: 50%;
 }
 .quiet-cta {
   background: var(--card);
   color: var(--ink);
   border: 1px solid var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
+  border-radius: 999px;
   font-weight: 600;
 }
 .quiet-cta:hover {
@@ -204,7 +215,7 @@ details:not([open]) > :not(summary) {
    5. HERO SECTION & WIREFRAME WAVE GRAPHIC
    ========================================================================== */
 .hero-section {
-  background: var(--ink);
+  background: var(--imperial-blue);
   color: var(--on-dark);
   display: flex;
   flex-direction: column;
@@ -283,7 +294,9 @@ details:not([open]) > :not(summary) {
   display: none;
 }
 .hero-heading {
-  padding-top: 68px;
+  padding-top: 40px;
+  margin-block: auto;
+  text-align: center;
   z-index: 1;
 }
 .hero-kicker {
@@ -293,7 +306,7 @@ details:not([open]) > :not(summary) {
 }
 .hero-heading h1 em {
   font-style: normal;
-  color: var(--primary);
+  color: var(--sandy-brown);
 }
 .waves {
   position: absolute;
@@ -308,57 +321,30 @@ details:not([open]) > :not(summary) {
   opacity: 0.22;
 }
 .hero-bottom {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 80px;
-  margin-top: auto;
-  padding-block: 120px 55px;
+  text-align: center;
+  padding-block: 0 55px;
   position: relative;
   z-index: 1;
 }
 .hero-description {
-  max-width: 390px;
+  max-width: 520px;
+  margin-inline: auto;
 }
 .hero-description > p {
   font-size: 15px;
   margin-bottom: 30px;
 }
-.hero-photo {
-  width: 390px;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.hero-photo video {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-.hero-photo::after {
-  content: "";
-  inset: 0;
-  position: absolute;
-  background: var(--footer-scrim);
-  opacity: 0.25;
-}
-.hero-photo figcaption {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  z-index: 1;
-  font-size: 10px;
-}
 /* ==========================================================================
    6. ABOUT CUFIA SECTION & CASCADE HEADING
    ========================================================================== */
 .about-intro {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 50px;
-  align-items: start;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 60px;
+}
+.about-intro-copy {
+  flex: 1;
 }
 .about-intro h2 {
   font-size: 36px;
@@ -366,21 +352,74 @@ details:not([open]) > :not(summary) {
 .cascade-word {
   display: inline-block;
 }
+.cascade-line {
+  display: block;
+}
 .about-actions {
   display: flex;
   align-items: center;
-  gap: 34px;
-  margin-top: 30px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
-.about-actions p {
+
+.about-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 36px;
+}
+.about-experience {
   color: var(--muted-foreground);
   font-size: 11px;
-  max-width: 170px;
+  max-width: 180px;
 }
-.about-actions strong {
+.about-experience strong {
   color: var(--teal);
   font-size: 17px;
   font-weight: 500;
+}
+
+.about-circles {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.about-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 8px 18px rgba(4, 42, 118, 0.1);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
+}
+.about-circle + .about-circle {
+  margin-left: -12px;
+}
+.about-circle:hover {
+  transform: translateY(-4px);
+}
+.about-circle:nth-child(1) {
+  border-color: var(--imperial-blue);
+}
+.about-circle:nth-child(2) {
+  border-color: var(--digital-blue);
+}
+.about-circle:nth-child(3) {
+  border-color: var(--sandy-brown);
+}
+.about-circle img {
+  width: 64%;
+  height: 64%;
+  object-fit: contain;
+  display: block;
 }
 .about-cards {
   display: grid;
@@ -388,15 +427,18 @@ details:not([open]) > :not(summary) {
   gap: 18px;
 }
 .about-cards article {
-  min-height: 300px;
+  min-height: 250px;
   background: var(--card);
-  padding: 25px;
+  padding: 36px 28px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
+  border-top: 3px solid var(--digital-blue);
+  border-radius: 8px;
 }
+
 .about-cards article > svg:not(.waves) {
   color: var(--teal);
   background: var(--background);
@@ -413,9 +455,11 @@ details:not([open]) > :not(summary) {
   color: var(--muted-foreground);
 }
 .about-cards .highlight-card {
-  background: var(--ink);
+  background: var(--imperial-blue);
   color: var(--on-dark);
+  border-top: 3px solid var(--sandy-brown);
 }
+
 .highlight-card p {
   color: var(--on-dark);
   opacity: 0.8;
@@ -499,45 +543,64 @@ details:not([open]) > :not(summary) {
 .service-card p {
   font-size: 12px;
 }
+.services-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 48px; /* Breathing room before the carousel cards */
+}
+.services-header-left {
+  max-width: 620px;
+}
+.services-header-left h2 {
+  margin: 0;
+}
+.services-subheading {
+  font-size: 21px;          /* bumped up from 17px */
+  line-height: 1.55;
+  color: #0c0c0c;
+  max-width: 620px;
+  margin-top: 22px;         /* gives the H2 room to breathe */
+}
+.services-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Keeps arrows aligned with the CTA */
+  gap: 20px; /* Space between the CTA button and the arrow buttons */
+  flex-shrink: 0;
+}
 .carousel-controls {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding: 23px 0;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
 }
 .carousel-controls button {
   border-radius: 50%;
   background: var(--background);
   color: var(--primary);
-  width: 32px;
-  height: 32px;
-}
-.services-bottom {
-  display: flex;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
   align-items: center;
-  gap: 20px;
-  color: var(--muted-foreground);
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid var(--border, #e2e8f0);
+  transition: all 0.2s ease;
 }
-.services-bottom p {
-  font-size: 12px;
+.carousel-controls button:hover {
+  background: var(--imperial-blue);
+  color: #ffffff;
+  border-color: var(--imperial-blue);
 }
-.services-bottom a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--primary);
-  font-size: 12px;
-}
-.rule {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
+
+
 /* ==========================================================================
    8. OUR APPROACH / OPERATING MODEL
    ========================================================================== */
 .values-section {
-  background: var(--ink);
+  background: var(--imperial-blue);
   color: var(--on-dark);
 }
 .center-heading {
@@ -843,7 +906,7 @@ details[open] .faq-toggle::before {
    13. FOOTER SECTION
    ========================================================================== */
 .footer-section {
-  background: var(--ink);
+  background: var(--imperial-blue);
   color: var(--on-dark);
 }
 .footer-inner {
@@ -991,7 +1054,13 @@ details[open] .faq-toggle::before {
   }
   .about-intro {
     gap: 25px;
-    grid-template-columns: 1fr 2.5fr;
+  }
+  .about-circle + .about-circle {
+    margin-left: -10px;
+  }
+  .about-circle {
+    width: 48px;
+    height: 48px;
   }
   .about-intro h2 {
     font-size: 32px;
@@ -1098,10 +1167,7 @@ details[open] .faq-toggle::before {
     display: none;
   }
   .hero-bottom {
-    align-items: flex-start;
-    gap: 30px;
-    padding-block: 100px 42px;
-    flex-direction: column;
+    padding-block: 0 42px;
   }
   .hero-description {
     max-width: 100%;
@@ -1109,22 +1175,24 @@ details[open] .faq-toggle::before {
   .hero-description > p {
     font-size: 13px;
   }
-  .hero-photo {
-    width: 53%;
-    align-self: flex-end;
-  }
   .waves {
     top: 28%;
     height: 33%;
   }
   .about-intro {
-    display: block;
+    flex-direction: column;
+    gap: 0;
   }
   .about-intro h2 {
     font-size: 31px;
   }
-  .about-actions {
+  .about-meta-row {
+    margin-top: 26px;
     gap: 18px;
+  }
+  .about-actions {
+    margin-top: 16px;
+    margin-left: 0;
   }
   .about-cards {
     grid-template-columns: 1fr;
@@ -1154,15 +1222,21 @@ details[open] .faq-toggle::before {
   .service-card p {
     font-size: 13px;
   }
-  .services-bottom {
-    flex-wrap: wrap;
+  .services-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 60px;
   }
-  .services-bottom .rule {
-    display: none;
+
+  .services-header-right {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
-  .services-bottom a {
-    margin-left: auto;
-  }
+
+
   .values-grid {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
@@ -1535,7 +1609,7 @@ html.js-ready .reveal-fade.is-revealed {
    ========================================================================== */
 .svc-hero {
   position: relative;
-  background: var(--ink);
+  background: var(--imperial-blue);
   color: var(--on-dark);
   min-height: 62svh;
   display: flex;

@@ -5,7 +5,7 @@
  * This script powers all interactive functionality across the Cufia homepage:
  *  1. Page Initialization (js-ready marker)
  *  2. Scroll-Triggered Reveal Animations (IntersectionObserver)
- *  3. Services Rail Carousel (Smooth horizontal scrolling)
+ *  3. Services Rail Carousel (Auto-play with pause on hover & manual controls)
  *  4. Dropdown & Mobile Menu Navigation Handlers (Click & Escape key)
  *  5. Scroll-Linked Interactive Sections:
  *     - Why Cufia: Native Sticky Card Stacking & Staggered Transitions
@@ -62,22 +62,129 @@ setupScrollReveal();
  * ------------------------------------------------------------------------------
  */
 function setupServicesCarousel() {
-  const carouselButtons = document.querySelectorAll("[data-carousel]");
-  const rail = document.querySelector(".service-rail");
+  // Scoped to the homepage services section so other pages are unaffected.
+  const rail = document.querySelector(".services-section .service-rail");
   if (!rail) return;
 
-  carouselButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const direction = btn.dataset.carousel === "next" ? 1 : -1;
-      const scrollOffset = direction * (rail.clientWidth / 3 + 20);
-      const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const AUTOPLAY_MS = 2000; // time each card stays in view
+  const RESUME_MS = 3000; // wait after manual interaction before resuming
 
-      rail.scrollBy({
-        left: scrollOffset,
-        behavior: isReduced ? "auto" : "smooth",
-      });
+  function stepSize() {
+    const card = rail.querySelector(".service-card");
+    const gap = parseFloat(getComputedStyle(rail).columnGap) || 20;
+    return card ? card.getBoundingClientRect().width + gap : rail.clientWidth / 3 + 20;
+  }
+
+  function move(direction) {
+    rail.scrollBy({
+      left: direction * stepSize(),
+      behavior: reduced.matches ? "auto" : "smooth",
+    });
+  }
+
+  // ----- Manual prev / next buttons -----
+  document.querySelectorAll("[data-carousel]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      move(btn.dataset.carousel === "next" ? 1 : -1);
+      holdTemporarily();
     });
   });
+
+  // ----- Automatic carousel -----
+  let autoTimer = null;
+  let resumeTimer = null;
+  let inView = true;
+  let hovering = false;
+  let focused = false;
+
+  const playing = () => Boolean(autoTimer);
+
+  function play() {
+    if (reduced.matches || autoTimer || !inView) return;
+    autoTimer = setInterval(() => {
+      const maxScroll = rail.scrollWidth - rail.clientWidth - 2;
+      if (rail.scrollLeft >= maxScroll) {
+        rail.scrollTo({ left: 0, behavior: reduced.matches ? "auto" : "smooth" });
+      } else {
+        move(1);
+      }
+    }, AUTOPLAY_MS);
+    updateToggle();
+  }
+
+  function pause() {
+    clearInterval(autoTimer);
+    autoTimer = null;
+    updateToggle();
+  }
+
+  function holdTemporarily() {
+    pause();
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      if (inView && !hovering && !focused) play();
+    }, RESUME_MS);
+  }
+
+  // Pause while the reader hovers or focuses a card, resume afterwards
+  rail.addEventListener("mouseenter", () => {
+    hovering = true;
+    pause();
+  });
+  rail.addEventListener("mouseleave", () => {
+    hovering = false;
+    if (!resumeTimer) play();
+  });
+  rail.addEventListener("focusin", () => {
+    focused = true;
+    pause();
+  });
+  rail.addEventListener("focusout", () => {
+    focused = false;
+    if (!resumeTimer) play();
+  });
+  rail.addEventListener("wheel", holdTemporarily, { passive: true });
+  rail.addEventListener("touchstart", holdTemporarily, { passive: true });
+  rail.addEventListener("pointerdown", holdTemporarily);
+
+  // Don't advance while the section is off-screen
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          inView = entry.isIntersecting;
+          if (inView) play();
+          else pause();
+        });
+      },
+      { threshold: 0.25 },
+    ).observe(rail);
+  }
+
+  // ----- Pause / play toggle button -----
+  const toggle = document.querySelector("[data-autoplay-toggle]");
+  const playIcon = toggle ? toggle.querySelector(".icon-play") : null;
+  const pauseIcon = toggle ? toggle.querySelector(".icon-pause") : null;
+
+  function updateToggle() {
+    if (!toggle) return;
+    const stopped = !playing();
+    toggle.setAttribute(
+      "aria-label",
+      stopped ? "Start automatic carousel" : "Pause automatic carousel",
+    );
+    if (playIcon) playIcon.hidden = stopped;
+    if (pauseIcon) pauseIcon.hidden = !stopped;
+  }
+
+  if (toggle) {
+    toggle.addEventListener("click", () => (playing() ? pause() : play()));
+  }
+
+  reduced.addEventListener("change", () => (reduced.matches ? pause() : play()));
+
+  if (!reduced.matches) play();
 }
 setupServicesCarousel();
 
