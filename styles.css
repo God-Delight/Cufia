@@ -222,77 +222,798 @@ details:not([open]) > :not(summary) {
   min-height: calc(100svh - 20px);
 }
 /* ==========================================================================
-   4. SITE HEADER & NAVIGATION
+   4. FLOATING SITE HEADER & ACCENTURE-STYLE NAVIGATION
    ========================================================================== */
-.site-header {
+.cufia-navbar-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 18px;
+  padding-bottom: 12px;
+  z-index: 100;
+}
+
+.cufia-navbar-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 78px;
-  border-bottom: 1px solid color-mix(in oklch, var(--on-dark) 8%, transparent);
   position: relative;
-  z-index: 5;
 }
-.logo {
-  font-size: 23px;
+
+/* --- Left Floating Nav Capsule --- */
+.cufia-nav-capsule {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 9999px;
+  padding: 5px 16px 5px 6px;
+  box-shadow: 0 6px 24px rgba(4, 42, 118, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(4, 42, 118, 0.08);
+  gap: 12px;
+}
+
+.cufia-nav-emblem-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffd566;
+  color: #042a76;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+.cufia-nav-emblem-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 10px rgba(255, 213, 102, 0.5);
+}
+
+.cufia-desktop-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cufia-nav-link-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
   font-weight: 500;
+  color: #1e293b;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.18s ease, background-color 0.18s ease;
+  white-space: nowrap;
+}
+
+.cufia-nav-link-btn:hover {
+  color: var(--primary);
+  background: rgba(47, 111, 237, 0.07);
+}
+
+.cufia-nav-link-btn.is-active {
+  color: var(--primary);
+  background: rgba(47, 111, 237, 0.1);
+  font-weight: 600;
+}
+
+.cufia-nav-caret {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #64748b;
+}
+
+.cufia-nav-link-btn.is-active .cufia-nav-caret {
+  transform: rotate(180deg);
+  color: var(--primary);
+}
+
+/* --- Right Floating CTA Pill --- */
+.cufia-floating-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cta);
+  color: #0c0c0c;
+  font-weight: 600;
+  font-size: 13.5px;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(255, 165, 82, 0.32);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.cufia-floating-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 165, 82, 0.45);
+}
+
+/* --- Mobile Top Bar Elements (Hidden on Desktop) --- */
+.cufia-mobile-bar-left,
+.cufia-mobile-hamburger {
+  display: none;
+}
+
+/* --- Desktop Mega Menu Container & Panels --- */
+.cufia-megamenu-dropdown-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding-top: 8px;
+  z-index: 1000;
+  pointer-events: none;
+}
+.cufia-megamenu-dropdown-container.is-active,
+.cufia-megamenu-dropdown-container:hover {
+  pointer-events: auto;
+}
+/* Invisible hover bridge so mouse movement never hits dead space */
+.cufia-megamenu-dropdown-container::before {
+  content: "";
+  position: absolute;
+  top: -24px;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.cufia-megamenu-card {
+  background: #ffffff;
+  border-radius: 26px;
+  box-shadow: 0 24px 60px rgba(4, 42, 118, 0.18), 0 0 0 1px rgba(4, 42, 118, 0.06);
+  overflow: hidden;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
+  display: none;
+}
+
+.cufia-megamenu-card.is-open {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.cufia-mm-heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+/* --- 1. Services Mega Menu (3-Column Layout) --- */
+.cufia-services-3col {
+  display: grid;
+  grid-template-columns: 270px 1fr 310px;
+  min-height: 480px;
+}
+
+.cufia-services-col1 {
+  background: #ffffff;
+  padding: 24px 16px;
+  border-right: 1px solid #edf2f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.cufia-services-navlist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cufia-service-tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.cufia-service-tab:hover {
+  background: #f1f5f9;
+  color: var(--primary);
+}
+
+.cufia-service-tab.active {
+  background: #eef4ff;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.cufia-tab-arrow {
+  color: #94a3b8;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.cufia-service-tab.active .cufia-tab-arrow,
+.cufia-service-tab:hover .cufia-tab-arrow {
+  color: var(--primary);
+  transform: translateX(3px);
+}
+
+.cufia-col1-bottom {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #edf2f7;
+}
+
+.cufia-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  padding-left: 10px;
+  transition: gap 0.2s ease;
+}
+
+.cufia-view-all-link:hover {
+  gap: 10px;
+}
+
+/* Services Column 2: Sub-categories */
+.cufia-services-col2 {
+  background: #ffffff;
+  padding: 28px 32px;
+  border-right: 1px solid #edf2f7;
+  overflow-y: auto;
+}
+
+.cufia-subpanel {
+  display: none;
+}
+
+.cufia-subpanel.active {
+  display: block;
+  animation: mmFadeSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cufia-subpanel-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.cufia-subpanel-header p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.45;
+  margin-bottom: 20px;
+}
+
+.cufia-subcat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cufia-subcat-list li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 9px;
+  color: #1e293b;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  background: #fafbfc;
+  border: 1px solid #f1f5f9;
+  transition: all 0.16s ease;
+}
+
+.cufia-subcat-list li a:hover {
+  background: #ffffff;
+  color: var(--primary);
+  border-color: rgba(47, 111, 237, 0.25);
+  box-shadow: 0 2px 8px rgba(4, 42, 118, 0.05);
+  transform: translateX(3px);
+}
+
+.cufia-link-arrow {
+  color: #94a3b8;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.cufia-subcat-list li a:hover .cufia-link-arrow {
+  color: var(--primary);
+  transform: translate(2px, -2px);
+}
+
+/* Services Column 3: Featured Card */
+.cufia-services-col3 {
+  background: #f8fafc;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cufia-feature-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  display: none;
+}
+
+.cufia-feature-card.active,
+.cufia-feature-card.static-card {
+  display: flex;
+  flex-direction: column;
+  animation: mmFadeSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cufia-feature-card-media {
+  height: 165px;
+  width: 100%;
+  overflow: hidden;
+  background: #e2e8f0;
+}
+
+.cufia-feature-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.cufia-feature-card:hover .cufia-feature-card-media img {
+  transform: scale(1.04);
+}
+
+.cufia-feature-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cufia-feature-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.cufia-feature-card-body h4 {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.cufia-feature-card-body p {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.45;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.cufia-feature-cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: inherit;
+  transition: gap 0.2s ease;
 }
-.brand-mark {
-  color: var(--teal);
-  font-size: 22px;
+
+.cufia-feature-cta:hover {
+  gap: 8px;
 }
-.desktop-nav {
+
+/* --- 2, 3, 4: Other Mega Menu Grids --- */
+.cufia-dropdown-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 310px;
+  min-height: 420px;
+}
+
+/* Insights and About menus have no left editorial column, so give the 2 link columns full flex space */
+.cufia-insights-grid,
+.cufia-about-grid {
+  grid-template-columns: 1fr 340px;
+}
+
+.cufia-editorial-col {
+  background: #f8fafc;
+  padding: 32px 28px;
+  border-right: 1px solid #edf2f7;
   display: flex;
-  align-items: center;
-  gap: 34px;
-  font-size: 12px;
+  flex-direction: column;
+  justify-content: center;
 }
-.desktop-nav a {
-  color: var(--on-dark);
+
+.cufia-editorial-col h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.35;
+  margin-bottom: 12px;
 }
-.services-menu {
-  position: relative;
+
+.cufia-editorial-col p {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
-.services-menu summary {
+
+.cufia-editorial-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.cufia-dropdown-navcols {
+  background: #ffffff;
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  border-right: 1px solid #edf2f7;
+}
+
+.cufia-dropdown-feature-col {
+  background: #f8fafc;
+  padding: 24px;
   display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  list-style: none;
+  flex-direction: column;
 }
-.services-menu summary::-webkit-details-marker,
-.mobile-menu summary::-webkit-details-marker {
-  display: none;
+
+@keyframes mmFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.services-dropdown {
+
+/* ==========================================================================
+   MOBILE NAVIGATION DRAWER (ACCENTURE-STYLE DRILL-DOWN FLOW)
+   ========================================================================== */
+.cufia-mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0.3s ease;
+}
+
+.cufia-mobile-drawer.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.cufia-mobile-backdrop {
   position: absolute;
-  top: 31px;
-  left: -24px;
-  width: 310px;
-  padding: 15px;
-  background: var(--card);
-  color: var(--ink);
-  box-shadow: var(--menu-shadow);
+  inset: 0;
+  background: rgba(4, 42, 118, 0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
-.services-dropdown a {
+
+.cufia-mobile-drawer.is-open .cufia-mobile-backdrop {
+  opacity: 1;
+}
+
+.cufia-mobile-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 390px;
+  height: 100%;
+  background: #0c0c0c;
+  color: #f6f8fb;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cufia-mobile-drawer.is-open .cufia-mobile-container {
+  transform: translateX(0);
+}
+
+.cufia-mobile-track-wrapper {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cufia-mobile-track-wrapper.is-drilldown {
+  transform: translateX(-50%);
+}
+
+.cufia-mobile-screen {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* Screen Header */
+.cufia-mobile-screen-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.cufia-mobile-icon-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.cufia-mobile-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cufia-mobile-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f6f8fb;
+}
+
+.cufia-mobile-brand-pill .cufia-emblem-icon {
+  color: #ffd566;
+}
+
+/* Level 1 Primary Links */
+.cufia-mobile-primary-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+.cufia-mobile-level1-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cufia-mobile-level1-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(3px);
+}
+
+.cufia-mobile-level1-btn svg {
+  color: #94a3b8;
+}
+
+/* Secondary Links */
+.cufia-mobile-secondary-links {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-  padding: 11px 8px;
-  color: var(--ink);
+  padding-left: 8px;
+  margin-bottom: 28px;
 }
-.services-dropdown a:hover {
-  color: var(--primary);
-  background: var(--background);
+
+.cufia-mobile-sublink {
+  color: #94a3b8;
+  font-size: 14.5px;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
-.mobile-menu {
+
+.cufia-mobile-sublink:hover {
+  color: #ffffff;
+}
+
+/* Mobile CTA Button */
+.cufia-mobile-cta-row {
+  margin-top: auto;
+  margin-bottom: 24px;
+}
+
+.cufia-mobile-cta-btn {
+  display: block;
+  text-align: center;
+  background: var(--cta);
+  color: #0c0c0c;
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 13px 24px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(255, 165, 82, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.cufia-mobile-cta-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Mobile Social Icons */
+.cufia-mobile-social-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-left: 4px;
+}
+
+.cufia-mobile-social-row a {
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.cufia-mobile-social-row a:hover {
+  color: #ffffff;
+}
+
+/* --- Level 2: Drilldown Screen --- */
+.cufia-mobile-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.cufia-mobile-drilldown-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.cufia-mobile-drilldown-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cufia-drilldown-badge {
+  color: #ffd566;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Accordion in Mobile Drilldown */
+.cufia-mobile-accordion {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cufia-mobile-acc-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 4px;
+  background: transparent;
+  border: none;
+  color: #f1f5f9;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cufia-mobile-acc-trigger svg {
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.cufia-mobile-accordion.is-open .cufia-mobile-acc-trigger svg {
+  transform: rotate(180deg);
+}
+
+.cufia-mobile-acc-content {
   display: none;
+  padding: 4px 8px 16px 12px;
+  flex-direction: column;
+  gap: 10px;
 }
+
+.cufia-mobile-accordion.is-open .cufia-mobile-acc-content {
+  display: flex;
+}
+
+.cufia-mobile-acc-content a {
+  color: #94a3b8;
+  font-size: 13.5px;
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.15s ease;
+}
+
+.cufia-mobile-acc-content a:hover {
+  color: #ffffff;
+}
+
+
+/* ==========================================================================
+   5. HERO SECTION CONTENT & WIREFRAME WAVE GRAPHIC
+   ========================================================================== */
 .hero-heading {
   padding-top: 40px;
   margin-block: auto;
@@ -334,6 +1055,7 @@ details:not([open]) > :not(summary) {
   font-size: 15px;
   margin-bottom: 30px;
 }
+
 /* ==========================================================================
    6. ABOUT CUFIA SECTION & CASCADE HEADING
    ========================================================================== */
@@ -618,6 +1340,12 @@ details:not([open]) > :not(summary) {
   margin-top: 20px;
   font-size: 13px;
 }
+.cufia-page .values-section .center-heading > p:not(.eyebrow) {
+  max-width: 620px;
+  margin: 24px auto 0;   /* same subheading size as the services section */
+  font-size: 21px;
+  line-height: 1.55;
+}
 /* ---- Values: connoisseur stack interactor ---- */
 .values-section .section-inner {
   gap: 56px;
@@ -682,14 +1410,14 @@ details:not([open]) > :not(summary) {
 }
 .value-title {
   display: block;
-  font-family: var(--font-sans);
-  font-size: clamp(32px, 3.6vw, 54px);
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 2.8vw, 42px);
   font-weight: 900;
-  line-height: 0.85;
-  letter-spacing: -0.05em;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 1.5px color-mix(in oklch, var(--on-dark) 90%, transparent);
+  -webkit-text-stroke: 1.2px color-mix(in oklch, var(--on-dark) 90%, transparent);
   opacity: 0.4;
   transform: translateX(0);
   transition: all 0.7s ease;
@@ -753,7 +1481,7 @@ details:not([open]) > :not(summary) {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   height: auto;
   filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.8));
 }
@@ -1129,6 +1857,54 @@ details[open] .faq-toggle::before {
   }
 }
 @media (max-width: 1050px) {
+  /* Floating Navbar Mobile Adaptations */
+  .cufia-nav-capsule,
+  .cufia-floating-cta,
+  .cufia-megamenu-dropdown-container {
+    display: none !important;
+  }
+  .cufia-mobile-bar-left {
+    display: flex !important;
+    align-items: center;
+  }
+  .cufia-mobile-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--on-dark);
+  }
+  .cufia-mobile-logo .cufia-emblem-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffd566;
+    color: #042a76;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .cufia-mobile-wordmark {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .cufia-mobile-hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    color: #ffffff;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
   .wrap {
     width: 84%;
   }
@@ -1319,6 +2095,10 @@ details[open] .faq-toggle::before {
     font-size: 17px;    /* Keeps mobile compact and clean */
     margin-top: 16px;
   }
+  .cufia-page .values-section .center-heading > p:not(.eyebrow) {
+    font-size: 17px;
+    margin-top: 16px;
+  }
 
   .values-stage {
     grid-template-columns: 1fr;
@@ -1332,7 +2112,7 @@ details[open] .faq-toggle::before {
     margin-top: 4px;
   }
   .value-title {
-    font-size: 30px;
+    font-size: 24px;
   }
   .values-detail {
     margin-top: 28px;

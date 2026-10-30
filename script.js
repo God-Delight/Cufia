@@ -189,28 +189,446 @@ setupServicesCarousel();
 
 /**
  * ------------------------------------------------------------------------------
- * 4. Dropdown & Mobile Navigation Menu Controls
+ * 4. Floating Navbar & Accenture-Style Navigation Engine
  * ------------------------------------------------------------------------------
  */
-function setupNavigationMenus() {
-  const menuLinks = document.querySelectorAll(".services-dropdown a, .mobile-menu a");
-  const menus = document.querySelectorAll(".services-menu, .mobile-menu");
+function setupFloatingNavigation() {
+  const navButtons = document.querySelectorAll(".cufia-nav-link-btn");
+  const megaPanels = document.querySelectorAll(".cufia-megamenu-card");
+  const dropdownContainer = document.querySelector(".cufia-megamenu-dropdown-container");
+  const navCapsule = document.querySelector(".cufia-nav-capsule");
+  let activeMenu = null;
+  let closeTimer = null;
 
-  // Close menus when a link is clicked
-  menuLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      menus.forEach((menu) => (menu.open = false));
+  function cancelClose() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+  }
+
+  function scheduleClose() {
+    cancelClose();
+    closeTimer = setTimeout(() => {
+      closeAllMenus();
+    }, 280);
+  }
+
+  // Function to close all desktop dropdowns
+  function closeAllMenus() {
+    cancelClose();
+    navButtons.forEach(btn => {
+      btn.classList.remove("is-active");
+      btn.setAttribute("aria-expanded", "false");
+    });
+    megaPanels.forEach(panel => {
+      panel.classList.remove("is-open");
+      panel.hidden = true;
+    });
+    if (dropdownContainer) {
+      dropdownContainer.classList.remove("is-active");
+    }
+    activeMenu = null;
+  }
+
+  // Function to open specific dropdown
+  function openMenu(menuKey) {
+    cancelClose();
+    navButtons.forEach(btn => {
+      const match = btn.getAttribute("data-menu") === menuKey;
+      btn.classList.toggle("is-active", match);
+      btn.setAttribute("aria-expanded", match ? "true" : "false");
+    });
+
+    megaPanels.forEach(panel => {
+      const match = panel.getAttribute("data-panel") === menuKey;
+      if (match) {
+        panel.hidden = false;
+        void panel.offsetWidth; // Force layout
+        panel.classList.add("is-open");
+      } else {
+        panel.classList.remove("is-open");
+        panel.hidden = true;
+      }
+    });
+
+    if (dropdownContainer) {
+      dropdownContainer.classList.add("is-active");
+    }
+    activeMenu = menuKey;
+  }
+
+  // Nav buttons hover & click
+  navButtons.forEach(btn => {
+    const menuKey = btn.getAttribute("data-menu");
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      cancelClose();
+      if (activeMenu === menuKey) {
+        closeAllMenus();
+      } else {
+        openMenu(menuKey);
+      }
+    });
+
+    btn.addEventListener("mouseenter", () => {
+      if (window.innerWidth > 1024) {
+        cancelClose();
+        openMenu(menuKey);
+      }
+    });
+
+    btn.addEventListener("mouseleave", () => {
+      if (window.innerWidth > 1024) {
+        scheduleClose();
+      }
     });
   });
 
-  // Close menus when Escape key is pressed
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      menus.forEach((menu) => (menu.open = false));
+  // Keep open when cursor enters dropdown container or any panel
+  if (dropdownContainer) {
+    dropdownContainer.addEventListener("mouseenter", () => {
+      if (window.innerWidth > 1024) {
+        cancelClose();
+      }
+    });
+    dropdownContainer.addEventListener("mouseleave", () => {
+      if (window.innerWidth > 1024) {
+        scheduleClose();
+      }
+    });
+  }
+
+  megaPanels.forEach(panel => {
+    panel.addEventListener("mouseenter", () => {
+      if (window.innerWidth > 1024) {
+        cancelClose();
+      }
+    });
+    panel.addEventListener("mouseleave", () => {
+      if (window.innerWidth > 1024) {
+        scheduleClose();
+      }
+    });
+  });
+
+  if (navCapsule) {
+    navCapsule.addEventListener("mouseenter", () => {
+      if (window.innerWidth > 1024 && activeMenu) {
+        cancelClose();
+      }
+    });
+    navCapsule.addEventListener("mouseleave", () => {
+      if (window.innerWidth > 1024) {
+        scheduleClose();
+      }
+    });
+  }
+
+  // Close menus when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".cufia-navbar-wrapper")) {
+      closeAllMenus();
     }
   });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeAllMenus();
+      closeMobileDrawer();
+    }
+  });
+
+  // Close menu when clicking any link inside mega dropdown
+  const dropdownLinks = document.querySelectorAll(".cufia-megamenu-card a");
+  dropdownLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      closeAllMenus();
+    });
+  });
+
+
+  // --- Services Mega Menu Tab Switching (Column 1 -> Column 2 & 3) ---
+  const serviceTabs = document.querySelectorAll(".cufia-service-tab");
+  const subpanels = document.querySelectorAll(".cufia-subpanel");
+  const featureCards = document.querySelectorAll(".cufia-services-col3 .cufia-feature-card");
+
+  function switchService(serviceKey) {
+    serviceTabs.forEach(tab => {
+      const match = tab.getAttribute("data-service-key") === serviceKey;
+      tab.classList.toggle("active", match);
+      tab.setAttribute("aria-selected", match ? "true" : "false");
+    });
+
+    subpanels.forEach(panel => {
+      const match = panel.getAttribute("data-service-content") === serviceKey;
+      panel.classList.toggle("active", match);
+    });
+
+    featureCards.forEach(card => {
+      const match = card.getAttribute("data-feature-content") === serviceKey;
+      card.classList.toggle("active", match);
+    });
+  }
+
+  serviceTabs.forEach(tab => {
+    tab.addEventListener("mouseenter", () => {
+      const key = tab.getAttribute("data-service-key");
+      switchService(key);
+    });
+    tab.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const key = tab.getAttribute("data-service-key");
+      switchService(key);
+    });
+  });
+
+  // --- Mobile Drawer Accenture-Style Drilldown Navigation ---
+  const mobileDrawer = document.getElementById("mobileDrawer");
+  const mobileOpenBtn = document.getElementById("mobileMenuOpenBtn");
+  const mobileCloseBtn = document.getElementById("mobileMenuCloseBtn");
+  const mobileCloseBtn2 = document.getElementById("mobileMenuCloseBtn2");
+  const mobileBackBtn = document.getElementById("mobileMenuBackBtn");
+  const mobileBackdrop = document.getElementById("mobileBackdrop");
+  const mobileTrackWrapper = document.getElementById("mobileTrackWrapper");
+  const mobileDrilldownTitle = document.getElementById("mobileDrilldownTitle");
+  const mobileDrilldownContent = document.getElementById("mobileDrilldownContent");
+
+  const mobileData = {
+    services: {
+      title: "Services",
+      items: [
+        {
+          name: "AI Transformation",
+          subs: ["AI Readiness Assessment", "AI Governance & Ethics", "AI Use-Case Discovery", "AI Use-Case Deployment", "Enterprise AI Transformation Strategy"],
+          target: "#service-0"
+        },
+        {
+          name: "Training",
+          subs: ["AI Board Training", "AI Executive Training", "Skills Development Training", "Leadership & Management Training"],
+          target: "#service-1"
+        },
+        {
+          name: "Digital Transformation",
+          subs: ["Digital Strategy", "Digital Operating Model", "Products & Platforms Digitalisation", "Customer Experience (CX)", "Technology Transformation"],
+          target: "#service-2"
+        },
+        {
+          name: "Operational Excellence",
+          subs: ["Process Transformation", "Operating Model Transformation", "Performance & Productivity", "Process Automation", "Continuous Improvement"],
+          target: "#service-4"
+        },
+        {
+          name: "Strategy Advisory",
+          subs: ["Corporate & Business Strategy", "Growth & Market Entry", "Customer Strategy", "Innovation Strategy", "Strategy Implementation"],
+          target: "#service-3"
+        },
+        {
+          name: "Data & Cloud Transformation",
+          subs: ["Data Strategy", "Data Governance", "Analytics & BI", "Cloud Strategy", "Cloud Migration & Modernisation", "Data & AI Infrastructure"],
+          target: "#service-5"
+        },
+        {
+          name: "Product Management",
+          subs: ["Product Strategy", "Product Discovery", "Digital Product Development", "Product Operating Model", "Product Leadership Support"],
+          target: "#service-6"
+        },
+        {
+          name: "Project Management",
+          subs: ["Portfolio & PMO Set-up", "Programme & Project Delivery", "Agile Transformation", "Project Recovery", "Benefits Realisation"],
+          target: "#service-7"
+        }
+      ]
+    },
+    industries: {
+      title: "Industries",
+      items: [
+        {
+          name: "Financial Services",
+          subs: ["Core Banking Modernisation", "Fintech Integration", "Risk & AML Frameworks"],
+          target: "#industries"
+        },
+        {
+          name: "Capital Markets",
+          subs: ["Trading Architecture", "Clearing & Settlements", "Market Surveillance"],
+          target: "#industries"
+        },
+        {
+          name: "Legal & Professional",
+          subs: ["Contract Automation", "Knowledge Management", "AI Compliance"],
+          target: "#industries"
+        },
+        {
+          name: "Technology & SaaS",
+          subs: ["Platform Scaling", "Cloud Economics", "Product Operating Model"],
+          target: "#industries"
+        },
+        {
+          name: "Energy & Utilities",
+          subs: ["Grid Modernisation", "Asset Performance", "Decarbonisation Strategy"],
+          target: "#industries"
+        },
+        {
+          name: "Manufacturing & Logistics",
+          subs: ["Supply Chain Resilience", "Smart Factory IoT", "Inventory Intelligence"],
+          target: "#industries"
+        },
+        {
+          name: "Public Sector & NGOs",
+          subs: ["Citizen Service Delivery", "Public Sector Modernisation", "Impact Measurement"],
+          target: "#industries"
+        }
+      ]
+    },
+    insights: {
+      title: "Insights",
+      items: [
+        {
+          name: "Case Studies",
+          subs: ["Transformation in Africa Series", "Tier-1 Bank AI Deployment", "Public Sector Digital Modernisation"],
+          target: "#case-studies"
+        },
+        {
+          name: "Articles & Perspectives",
+          subs: ["The AI-Ready Enterprise in 2026", "Bridging Strategy & Board Governance", "Cloud Migration Pitfalls & Playbooks"],
+          target: "#insights"
+        }
+      ]
+    },
+    about: {
+      title: "About Us",
+      items: [
+        {
+          name: "Who We Are",
+          subs: ["Our Story & Purpose", "Core Values", "Global Footprint"],
+          target: "#about"
+        },
+        {
+          name: "Our Team & Expert Council",
+          subs: ["Council Fellows", "Senior Practitioners", "Advisory Roster"],
+          target: "#about"
+        },
+        {
+          name: "Careers",
+          subs: ["Join the Expert Council", "Consulting Opportunities", "Engagement Models"],
+          target: "#contact"
+        }
+      ]
+    }
+  };
+
+  function openMobileDrawer() {
+    if (mobileDrawer) {
+      mobileDrawer.classList.add("is-open");
+      mobileDrawer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      if (mobileTrackWrapper) {
+        mobileTrackWrapper.classList.remove("is-drilldown");
+      }
+    }
+  }
+
+  function closeMobileDrawer() {
+    if (mobileDrawer) {
+      mobileDrawer.classList.remove("is-open");
+      mobileDrawer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (mobileTrackWrapper) {
+        mobileTrackWrapper.classList.remove("is-drilldown");
+      }
+    }
+  }
+
+  function renderDrilldown(sectionKey) {
+    const data = mobileData[sectionKey];
+    if (!data || !mobileDrilldownContent || !mobileDrilldownTitle) return;
+
+    mobileDrilldownTitle.textContent = data.title;
+    mobileDrilldownContent.innerHTML = "";
+
+    data.items.forEach((item, idx) => {
+      const acc = document.createElement("div");
+      acc.className = "cufia-mobile-accordion";
+
+      const trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.className = "cufia-mobile-acc-trigger";
+      trigger.innerHTML = `<span>${item.name}</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>`;
+
+      const content = document.createElement("div");
+      content.className = "cufia-mobile-acc-content";
+
+      item.subs.forEach(sub => {
+        const link = document.createElement("a");
+        link.href = item.target;
+        link.textContent = sub;
+        link.addEventListener("click", () => {
+          closeMobileDrawer();
+        });
+        content.appendChild(link);
+      });
+
+      trigger.addEventListener("click", () => {
+        const isOpen = acc.classList.contains("is-open");
+        // Close other accordions in this view
+        mobileDrilldownContent.querySelectorAll(".cufia-mobile-accordion").forEach(a => a.classList.remove("is-open"));
+        if (!isOpen) {
+          acc.classList.add("is-open");
+        }
+      });
+
+      acc.appendChild(trigger);
+      acc.appendChild(content);
+      mobileDrilldownContent.appendChild(acc);
+    });
+
+    if (mobileTrackWrapper) {
+      mobileTrackWrapper.classList.add("is-drilldown");
+    }
+  }
+
+  if (mobileOpenBtn) {
+    mobileOpenBtn.addEventListener("click", openMobileDrawer);
+  }
+  if (mobileCloseBtn) {
+    mobileCloseBtn.addEventListener("click", closeMobileDrawer);
+  }
+  if (mobileCloseBtn2) {
+    mobileCloseBtn2.addEventListener("click", closeMobileDrawer);
+  }
+  if (mobileBackdrop) {
+    mobileBackdrop.addEventListener("click", closeMobileDrawer);
+  }
+  if (mobileBackBtn) {
+    mobileBackBtn.addEventListener("click", () => {
+      if (mobileTrackWrapper) {
+        mobileTrackWrapper.classList.remove("is-drilldown");
+      }
+    });
+  }
+
+  // Drilldown level-1 buttons
+  const drilldownButtons = document.querySelectorAll("[data-drilldown]");
+  drilldownButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const section = btn.getAttribute("data-drilldown");
+      renderDrilldown(section);
+    });
+  });
+
+  // Close mobile drawer on clicking any regular anchor inside
+  const mobileLinks = document.querySelectorAll(".cufia-mobile-secondary-links a, .cufia-mobile-cta-btn");
+  mobileLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      closeMobileDrawer();
+    });
+  });
 }
-setupNavigationMenus();
+
+setupFloatingNavigation();
+
 /**
  * ------------------------------------------------------------------------------
  * 5. Scroll-Linked Interactive Sections
@@ -343,12 +761,14 @@ function setupValuesStack() {
   });
 
   function createLoop(index) {
-    const { image: src, clip } = items[index].dataset;
+    const { image: src, clip, fit } = items[index].dataset;
     const selector = `#${clip} .path`;
 
     if (timeline) timeline.kill();
 
     image.setAttribute("href", src);
+    // data-fit="full" shows the whole photo under the shapes; "fill" crops it to fill the square
+    image.setAttribute("preserveAspectRatio", fit === "fill" ? "xMidYMid slice" : "xMidYMid meet");
     group.setAttribute("clip-path", `url(#${clip})`);
 
     if (!hasGsap || reduced.matches) {
