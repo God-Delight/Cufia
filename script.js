@@ -995,3 +995,232 @@ function setupTestimonialsCarousel() {
   });
 }
 setupTestimonialsCarousel();
+
+/**
+ * ------------------------------------------------------------------------------
+ * 8. Arrow CTA: dashed arrow that follows the cursor and points at the CTA button
+ *    Target: any element with [data-arrow-cta] (footer "Let's talk" button).
+ *    Only runs on devices with a real pointer, and only while the button is on screen.
+ * ------------------------------------------------------------------------------
+ */
+function setupArrowCta() {
+  const canvas = document.getElementById("arrowCtaCanvas");
+  const target = document.querySelector("[data-arrow-cta]");
+  if (!canvas || !target) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let dpr = window.devicePixelRatio || 1;
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  const mouse = { x: 0, y: 0 };
+  let frameId = null;
+
+  const resizeCanvas = () => {
+    dpr = window.devicePixelRatio || 1;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+
+  // Turns the brand colour variable (hex or rgb) into "r, g, b" for rgba()
+  const getRgb = () => {
+    const raw = getComputedStyle(document.documentElement)
+      .getPropertyValue("--arrow-cta-color")
+      .trim();
+    const probe = document.createElement("span");
+    probe.style.color = raw || "#ffa552";
+    document.body.appendChild(probe);
+    const resolved = getComputedStyle(probe).color; // always "rgb(r, g, b)"
+    probe.remove();
+    const m = resolved.match(/\d+(\.\d+)?/g);
+    return m ? m.slice(0, 3).join(", ") : "255, 165, 82";
+  };
+  let rgb = getRgb();
+
+  const drawArrow = () => {
+    const x0 = mouse.x;
+    const y0 = mouse.y;
+    if (!x0 || !y0) return;
+
+    const rect = target.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    // End point sits just outside the button, on the line from cursor to button centre
+    const a = Math.atan2(cy - y0, cx - x0);
+    const x1 = cx - Math.cos(a) * (rect.width / 2 + 12);
+    const y1 = cy - Math.sin(a) * (rect.height / 2 + 12);
+
+    // Curve control point
+    const midX = (x0 + x1) / 2;
+    const midY = (y0 + y1) / 2;
+    const offset = Math.min(200, Math.hypot(x1 - x0, y1 - y0) * 0.5);
+    const t = Math.max(-1, Math.min(1, (y0 - y1) / 200));
+    const controlX = midX;
+    const controlY = midY + offset * t;
+
+    // Fades out as the cursor gets close to the button
+    const r = Math.hypot(x1 - x0, y1 - y0);
+    const opacity = Math.max(
+      0,
+      Math.min(0.75, (r - Math.max(rect.width, rect.height) / 2) / 750),
+    );
+    if (opacity <= 0) return;
+
+    ctx.strokeStyle = `rgba(${rgb}, ${opacity})`;
+    ctx.lineWidth = 1;
+
+    // Dashed curve
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.quadraticCurveTo(controlX, controlY, x1, y1);
+    ctx.setLineDash([10, 4]);
+    ctx.stroke();
+    ctx.restore();
+
+    // Arrowhead
+    const angle = Math.atan2(y1 - controlY, x1 - controlX);
+    const headLength = 10;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(
+      x1 - headLength * Math.cos(angle - Math.PI / 6),
+      y1 - headLength * Math.sin(angle - Math.PI / 6),
+    );
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(
+      x1 - headLength * Math.cos(angle + Math.PI / 6),
+      y1 - headLength * Math.sin(angle + Math.PI / 6),
+    );
+    ctx.stroke();
+  };
+
+  const animate = () => {
+    ctx.clearRect(0, 0, width, height);
+    drawArrow();
+    frameId = requestAnimationFrame(animate);
+  };
+
+  const start = () => {
+    if (frameId !== null) return;
+    rgb = getRgb();
+    resizeCanvas();
+    canvas.classList.add("is-active");
+    frameId = requestAnimationFrame(animate);
+  };
+
+  const stop = () => {
+    canvas.classList.remove("is-active");
+    if (frameId !== null) {
+      cancelAnimationFrame(frameId);
+      frameId = null;
+    }
+    ctx.clearRect(0, 0, width, height);
+  };
+
+  window.addEventListener("resize", () => {
+    if (frameId !== null) resizeCanvas();
+  });
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  // Hide the arrow when the cursor leaves the browser window
+  document.documentElement.addEventListener("mouseleave", () => {
+    mouse.x = 0;
+    mouse.y = 0;
+  });
+
+  // Only animate while the CTA button is actually on screen
+  new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => (entry.isIntersecting ? start() : stop()));
+    },
+    { threshold: 0 },
+  ).observe(target);
+}
+setupArrowCta();
+
+/**
+ * ------------------------------------------------------------------------------
+ * 9. Sticky footer: blur-fade entrance once the footer starts being uncovered
+ *    Adds .is-revealed to .sticky-footer; the animation itself is CSS (.footer-anim).
+ *    Separate from the section 2 reveal system, so other animations are unaffected.
+ * ------------------------------------------------------------------------------
+ */
+function setupStickyFooterReveal() {
+  const footer = document.querySelector(".sticky-footer");
+  if (!footer) return;
+  if (!("IntersectionObserver" in window)) {
+    footer.classList.add("is-revealed");
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          footer.classList.add("is-revealed");
+          obs.disconnect();
+        }
+      });
+    },
+    { threshold: 0.1 },
+  );
+  observer.observe(footer);
+}
+setupStickyFooterReveal();
+
+/**
+ * ------------------------------------------------------------------------------
+ * 10. Footer newsletter form (front-end only for now)
+ *     Validates the email and shows a message. Nothing is sent or stored yet;
+ *     connect it to your email service inside the marked spot below.
+ * ------------------------------------------------------------------------------
+ */
+function setupNewsletterForm() {
+  const form = document.getElementById("newsletterForm");
+  const input = document.getElementById("newsletterEmail");
+  const msg = document.getElementById("newsletterMsg");
+  if (!form || !input || !msg) return;
+
+  const setMessage = (text, type) => {
+    msg.textContent = text;
+    msg.classList.toggle("is-error", type === "error");
+    msg.classList.toggle("is-success", type === "success");
+  };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = input.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!valid) {
+      input.setAttribute("aria-invalid", "true");
+      setMessage(
+        email ? "Please enter a valid email address." : "Please enter your email address.",
+        "error",
+      );
+      input.focus();
+      return;
+    }
+    input.removeAttribute("aria-invalid");
+
+    // TODO: send `email` to your email service here (Mailchimp, Brevo, Formspree, etc.)
+
+    form.reset();
+    setMessage("Thanks for subscribing!", "success");
+  });
+
+  input.addEventListener("input", () => {
+    if (input.getAttribute("aria-invalid") === "true") {
+      input.removeAttribute("aria-invalid");
+      setMessage("", null);
+    }
+  });
+}
+setupNewsletterForm();
