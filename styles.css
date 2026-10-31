@@ -3460,3 +3460,86 @@ html.js-ready .reveal-fade.is-revealed {
     font-size: 16px;
   }
 }
+
+/* ==========================================================================
+   INDUSTRIES OVERVIEW (industries.html): wide grid of large cards
+   ========================================================================== */
+.ind-section {
+  background: var(--background);
+  padding: 48px 12px 110px;
+}
+.ind-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px 16px;
+}
+.ind-card {
+  display: block;
+  color: var(--text-ink);
+}
+.ind-card:hover {
+  opacity: 1;
+}
+.ind-card:last-child {
+  grid-column: 1 / -1;
+}
+.ind-photo {
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #e6ebf3;
+}
+.ind-card:last-child .ind-photo {
+  aspect-ratio: 21 / 9;
+}
+.ind-photo img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ind-card:hover .ind-photo img {
+  transform: scale(1.04);
+}
+.ind-card .ind-label {
+  display: block;
+  margin-top: 22px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--muted-foreground);
+}
+.ind-card h3 {
+  margin-top: 14px;
+  max-width: 24ch;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.25;
+  color: var(--imperial-blue);
+}
+.ind-card .ind-more {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--digital-blue);
+}
+@media (max-width: 1050px) {
+  .ind-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .ind-section {
+    padding: 32px 12px 72px;
+  }
+  .ind-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
+  }
+  .ind-card:last-child .ind-photo {
+    aspect-ratio: 1 / 1;
+  }
+  .ind-photo {
+    border-radius: 22px;
+  }
+}
