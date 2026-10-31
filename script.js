@@ -1239,3 +1239,233 @@ function setupNewsletterForm() {
   });
 }
 setupNewsletterForm();
+
+/**
+ * ------------------------------------------------------------------------------
+ * 11. Contact page: rotating wireframe globe (needs d3 + topojson-client, loaded
+ *     by contact.html). Does nothing on other pages or if the libraries or the
+ *     world map file fail to load.
+ * ------------------------------------------------------------------------------
+ */
+function setupContactGlobe() {
+  const holder = document.getElementById("contactGlobe");
+  if (!holder || !window.d3 || !window.topojson) return;
+
+  const svgEl = holder.querySelector("svg");
+  const svg = d3.select(svgEl);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const colour =
+    getComputedStyle(document.documentElement).getPropertyValue("--imperial-blue").trim() || "#042a76";
+
+  const projection = d3.geoOrthographic().precision(0.1);
+  const path = d3.geoPath(projection);
+  let rotation = [0, 0];
+  let spherePath = null;
+  let countryPaths = null;
+  let visible = false;
+  let dragging = false;
+  let last = [0, 0];
+  let frame = null;
+
+  const draw = () => {
+    if (!countryPaths) return;
+    countryPaths.attr("d", path);
+    spherePath.attr("d", path);
+  };
+
+  const resize = () => {
+    const size = holder.clientWidth;
+    if (!size) return;
+    svgEl.setAttribute("width", size);
+    svgEl.setAttribute("height", size);
+    svgEl.setAttribute("viewBox", `0 0 ${size} ${size}`);
+    projection.scale((size / 2) * 0.9).translate([size / 2, size / 2]);
+    draw();
+  };
+
+  const tick = () => {
+    if (!visible || dragging || reduceMotion) {
+      frame = null;
+      return;
+    }
+    rotation[0] = (rotation[0] + 0.45) % 360;
+    projection.rotate(rotation);
+    draw();
+    frame = requestAnimationFrame(tick);
+  };
+  const start = () => {
+    if (!frame && visible && !dragging && !reduceMotion && countryPaths) {
+      frame = requestAnimationFrame(tick);
+    }
+  };
+
+  svgEl.addEventListener("pointerdown", (e) => {
+    dragging = true;
+    last = [e.clientX, e.clientY];
+    svgEl.setPointerCapture(e.pointerId);
+  });
+  svgEl.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - last[0];
+    const dy = e.clientY - last[1];
+    rotation = [rotation[0] + dx * 0.5, Math.max(-90, Math.min(90, rotation[1] - dy * 0.5))];
+    last = [e.clientX, e.clientY];
+    projection.rotate(rotation);
+    draw();
+  });
+  const endDrag = () => {
+    dragging = false;
+    start();
+  };
+  svgEl.addEventListener("pointerup", endDrag);
+  svgEl.addEventListener("pointercancel", endDrag);
+
+  new IntersectionObserver(
+    (entries) => {
+      visible = entries[0].isIntersecting;
+      if (visible) start();
+    },
+    { threshold: 0.1 },
+  ).observe(holder);
+  if ("ResizeObserver" in window) new ResizeObserver(resize).observe(holder);
+
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json")
+    .then((r) => r.json())
+    .then((world) => {
+      const countries = topojson.feature(world, world.objects.countries).features;
+      spherePath = svg
+        .append("path")
+        .datum({ type: "Sphere" })
+        .attr("fill", "none")
+        .attr("stroke", colour)
+        .attr("stroke-width", 1.5)
+        .attr("opacity", 0.8);
+      countryPaths = svg
+        .selectAll("path.country")
+        .data(countries)
+        .join("path")
+        .attr("class", "country")
+        .attr("fill", "none")
+        .attr("stroke", colour)
+        .attr("stroke-width", 0.6);
+      projection.rotate(rotation);
+      resize();
+      start();
+    })
+    .catch(() => {
+      /* map file unavailable: leave the globe area empty */
+    });
+}
+setupContactGlobe();
+
+/**
+ * ------------------------------------------------------------------------------
+ * 12. Contact page: form validation (front-end only for now)
+ *     Nothing is sent or stored yet; connect your form service at the TODO below.
+ * ------------------------------------------------------------------------------
+ */
+function setupContactForm() {
+  const form = document.getElementById("contactForm");
+  const success = document.getElementById("contactSuccess");
+  const successMsg = document.getElementById("contactSuccessMsg");
+  if (!form || !success || !successMsg) return;
+
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errorBox = (el) => {
+    const wrap = el.closest(".form-field");
+    return wrap ? wrap.querySelector(".field-error") : null;
+  };
+  const setError = (el, message) => {
+    const box = errorBox(el);
+    if (box) box.textContent = message;
+    if (el.matches("input, select, textarea")) {
+      if (message) el.setAttribute("aria-invalid", "true");
+      else el.removeAttribute("aria-invalid");
+    }
+  };
+
+  const checks = [
+    ["#firstName", (el) => (el.value.trim() ? "" : "Please enter your first name.")],
+    ["#lastName", (el) => (el.value.trim() ? "" : "Please enter your last name.")],
+    [
+      "#workEmail",
+      (el) => {
+        const v = el.value.trim();
+        if (!v) return "Please enter your work email.";
+        return emailRe.test(v) ? "" : "Please enter a valid email address.";
+      },
+    ],
+    [
+      "#otherEmails",
+      (el) => {
+        const list = el.value.split(/[,;\s]+/).filter(Boolean);
+        return list.every((v) => emailRe.test(v)) ? "" : "Please check the email addresses you entered.";
+      },
+    ],
+    [
+      "#phone",
+      (el) => {
+        const v = el.value.trim();
+        if (!v) return "";
+        const ok = /^(\+|00)\d[\d\s\-().]{5,}$/.test(v);
+        return ok ? "" : "Please include the country code, for example +234.";
+      },
+    ],
+    ["#organisation", (el) => (el.value.trim() ? "" : "Please enter your organisation.")],
+    ["#jobTitle", (el) => (el.value.trim() ? "" : "Please enter your job title.")],
+    ["#country", (el) => (el.value ? "" : "Please select your country.")],
+    ["#orgType", (el) => (el.value ? "" : "Please select your organisation type.")],
+    [
+      "#servicesGroup",
+      (el) =>
+        el.querySelector('input[name="services"]:checked') ? "" : "Please choose at least one option.",
+    ],
+    ["#consent", (el) => (el.checked ? "" : "Please confirm your consent to continue.")],
+  ];
+
+  const validate = () => {
+    let firstInvalid = null;
+    checks.forEach(([selector, test]) => {
+      const el = form.querySelector(selector);
+      if (!el) return;
+      const message = test(el);
+      setError(el, message);
+      if (message && !firstInvalid) {
+        firstInvalid = el.matches("fieldset") ? el.querySelector("input") : el;
+      }
+    });
+    return firstInvalid;
+  };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const invalid = validate();
+    if (invalid) {
+      invalid.focus();
+      return;
+    }
+
+    // TODO: send `new FormData(form)` to your form service here.
+
+    const first = form.querySelector("#firstName").value.trim();
+    successMsg.textContent = `Thank you, ${first}. A member of the team will review your submission and respond to you.`;
+    form.hidden = true;
+    success.hidden = false;
+    success.focus();
+    success.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  // Clear a field's error as soon as the person fixes it.
+  const clear = (e) => {
+    const el = e.target.closest("[aria-invalid], fieldset, .form-field");
+    if (!el) return;
+    const box = errorBox(e.target);
+    if (box && box.textContent) {
+      box.textContent = "";
+      if (e.target.matches("input, select, textarea")) e.target.removeAttribute("aria-invalid");
+    }
+  };
+  form.addEventListener("input", clear);
+  form.addEventListener("change", clear);
+}
+setupContactForm();
