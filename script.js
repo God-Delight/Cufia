@@ -1469,3 +1469,38 @@ function setupContactForm() {
   form.addEventListener("change", clear);
 }
 setupContactForm();
+
+/**
+ * ------------------------------------------------------------------------------
+ * 13. Service pages: stacking cards, slight scale-down of the card being covered
+ *     The stacking itself is CSS (position: sticky); this only adds the scale.
+ * ------------------------------------------------------------------------------
+ */
+function setupStackCards() {
+  const cards = Array.from(document.querySelectorAll(".stack-card"));
+  if (cards.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    cards.forEach((card, i) => {
+      const next = cards[i + 1];
+      if (!next) return;
+      const gap = parseFloat(getComputedStyle(card.parentElement).rowGap) || 0;
+      const full = card.offsetHeight + gap; // distance between the two cards when not overlapping
+      const distance = next.getBoundingClientRect().top - card.getBoundingClientRect().top;
+      const progress = Math.min(1, Math.max(0, (full - distance) / full));
+      card.style.transform = `scale(${1 - progress * 0.05})`;
+    });
+  };
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+}
+setupStackCards();

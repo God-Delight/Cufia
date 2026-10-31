@@ -1,0 +1,66 @@
+IMAGES THE SERVICE PAGES EXPECT (same folder as the HTML files)
+
+ai-transformation.html
+  Hero picture: AI Transformation.jpeg   (already used on services.html)
+  Card image:   AI Readiness Assessment.jpg
+  Card image:   AI Governance.jpg
+  Card image:   AI Use-Case Discovery.jpg
+  Card image:   AI Use-Case Deployment.jpg
+  Card image:   Enterprise AI Strategy.jpg
+
+training.html
+  Hero picture: AI Training.jpg   (already used on services.html)
+  Card image:   AI Board Training.jpg
+  Card image:   AI Executive Training.jpg
+  Card image:   Skills Development Training.jpg
+  Card image:   Leadership and Management Training.jpg
+
+digital-transformation.html
+  Hero picture: Digital Transformation.jpg   (already used on services.html)
+  Card image:   Digital Strategy.jpg
+  Card image:   Digital Operating Model.jpg
+  Card image:   Products and Platforms Digitalisation.jpg
+  Card image:   Customer Experience.jpg
+  Card image:   Technology Transformation.jpg
+
+strategy-advisory.html
+  Hero picture: Strategy Advisory.jpg   (already used on services.html)
+  Card image:   Corporate and Business Strategy.jpg
+  Card image:   Growth and Market Entry.jpg
+  Card image:   Customer Strategy.jpg
+  Card image:   Innovation Strategy.jpg
+  Card image:   Financial Performance and Value Creation.jpg
+  Card image:   Strategy Execution and Transformation Office.jpg
+
+operational-excellence.html
+  Hero picture: Operations.jpg   (already used on services.html)
+  Card image:   Process Transformation.jpg
+  Card image:   Operating Model Transformation.jpg
+  Card image:   Performance and Productivity.jpg
+  Card image:   Process Automation.jpg
+  Card image:   Continuous Improvement.jpg
+
+data-cloud-transformation.html
+  Hero picture: Cloud.jpg   (already used on services.html)
+  Card image:   Data Strategy.jpg
+  Card image:   Data Governance.jpg
+  Card image:   Analytics.jpg
+  Card image:   Cloud Strategy.jpg
+  Card image:   Cloud Migration and Modernisation.jpg
+  Card image:   Data and AI Infrastructure.jpg
+
+product-management.html
+  Hero picture: Product Management.jpg   (already used on services.html)
+  Card image:   Product Strategy.jpg
+  Card image:   Product Discovery.jpg
+  Card image:   Digital Product Development.jpg
+  Card image:   Product Operating Model.jpg
+  Card image:   Product Leadership Support.jpg
+
+project-management.html
+  Hero picture: Project Management.jpg   (already used on services.html)
+  Card image:   Portfolio and PMO Set-up.jpg
+  Card image:   Programme and Project Delivery.jpg
+  Card image:   Agile Transformation.jpg
+  Card image:   Project Recovery.jpg
+  Card image:   Benefits Realisation.jpg

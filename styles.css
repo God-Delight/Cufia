@@ -3196,3 +3196,267 @@ html.js-ready .reveal-fade.is-revealed {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ==========================================================================
+   SERVICE PAGE TEMPLATE (ai-transformation.html; reuse for the other service pages)
+   Hero reuses .svc-hero. Classes are prefixed sp- / stack- to avoid clashing with services.html.
+   ========================================================================== */
+.sp-hero-side {
+  justify-self: end;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+.sp-hero-side .svc-hero-copy {
+  justify-self: auto;
+}
+@media (max-width: 1050px) {
+  .sp-hero-side {
+    justify-self: start;
+  }
+}
+/* Picture + the challenge */
+.sp-intro {
+  background: var(--background);
+  padding: 80px 0 40px;
+}
+.sp-photo {
+  margin: 0;
+  aspect-ratio: 16 / 7;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #e6ebf3;
+}
+.sp-intro-text {
+  max-width: 820px;
+  margin: 64px auto 0;
+}
+.sp-intro-text h2,
+.sp-stack-section h2,
+.sp-expect h2,
+.sp-why h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--imperial-blue);
+}
+.sp-intro-text h2 {
+  margin-bottom: 22px;
+}
+.sp-intro-text > p:not(.eyebrow) {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+}
+/* How we help: stacking cards */
+.sp-stack-section {
+  background: var(--background);
+  padding: 60px 0 120px;
+}
+.sp-stack-section h2 {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.stack-card {
+  position: sticky;
+  top: calc(32px + var(--i, 0) * 24px);
+  scroll-margin-top: 60px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 32px;
+  min-height: 440px;
+  padding: 36px;
+  border-radius: 28px;
+  overflow: hidden;
+  transform-origin: top center;
+  will-change: transform;
+  box-shadow: 0 -14px 32px -20px rgba(4, 42, 118, 0.3);
+}
+.stack-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+.stack-card .stack-num {
+  font-family: var(--font-heading);
+  font-size: 22px;
+}
+.stack-card h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.15;
+}
+.stack-card .stack-lead {
+  margin-top: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.stack-card .stack-body {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.stack-card-img {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.stack-card--blue {
+  background: var(--imperial-blue);
+  color: var(--on-dark);
+}
+.stack-card--blue .stack-num {
+  color: var(--sandy-brown);
+}
+.stack-card--blue h3 {
+  color: #ffffff;
+}
+.stack-card--blue .stack-body {
+  color: color-mix(in oklch, var(--on-dark) 82%, transparent);
+}
+.stack-card--blue .stack-card-img {
+  background: rgba(255, 255, 255, 0.1);
+}
+.stack-card--white {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--text-ink);
+}
+.stack-card--white .stack-num {
+  color: var(--digital-blue);
+}
+.stack-card--white h3,
+.stack-card--sand h3 {
+  color: var(--imperial-blue);
+}
+.stack-card--white .stack-body {
+  color: var(--muted-foreground);
+}
+.stack-card--white .stack-card-img {
+  background: var(--platinum);
+}
+.stack-card--sand {
+  background: var(--sandy-brown);
+  color: var(--text-ink);
+}
+.stack-card--sand .stack-num {
+  color: var(--imperial-blue);
+}
+.stack-card--sand .stack-body {
+  color: color-mix(in oklch, var(--text-ink) 82%, transparent);
+}
+.stack-card--sand .stack-card-img {
+  background: rgba(255, 255, 255, 0.35);
+}
+/* What you can expect (white, centred) */
+.sp-expect {
+  background: var(--card);
+  padding: 110px 0;
+  text-align: center;
+}
+.sp-ticks {
+  list-style: none;
+  margin: 48px auto 0;
+  padding: 0;
+  width: fit-content;
+  max-width: min(720px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  text-align: left;
+}
+.sp-ticks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text-ink);
+}
+.tick {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--imperial-blue);
+  color: #ffffff;
+}
+/* Why Cufia (blue, centred) */
+.sp-why {
+  background: var(--imperial-blue);
+  color: var(--on-dark);
+  padding: 110px 0;
+  text-align: center;
+}
+.sp-why h2 {
+  color: #ffffff;
+}
+.sp-why p {
+  max-width: 780px;
+  margin: 28px auto 0;
+  font-size: 19px;
+  line-height: 1.75;
+  color: color-mix(in oklch, var(--on-dark) 88%, transparent);
+}
+/* Divider when Why Cufia (blue) sits directly above the CTA (blue) */
+.sp-why + .cta-section {
+  border-top: 1px solid rgba(246, 248, 251, 0.14);
+}
+/* Tailored CTA with two supporting lines */
+.cta-inner--service > p {
+  max-width: 640px;
+}
+.cta-inner--service > p + p {
+  margin-top: 12px;
+}
+@media (max-width: 900px) {
+  .sp-intro {
+    padding: 56px 0 24px;
+  }
+  .sp-photo {
+    aspect-ratio: 4 / 3;
+    border-radius: 18px;
+  }
+  .sp-intro-text {
+    margin-top: 40px;
+  }
+  .sp-stack-section {
+    padding: 40px 0 80px;
+  }
+  .stack-card {
+    top: calc(16px + var(--i, 0) * 14px);
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    padding: 24px;
+    border-radius: 22px;
+  }
+  .stack-card-img {
+    height: 220px;
+  }
+  .stack-card h3 {
+    font-size: 26px;
+  }
+  .sp-expect,
+  .sp-why {
+    padding: 72px 0;
+  }
+  .sp-ticks li,
+  .sp-why p {
+    font-size: 16px;
+  }
+}

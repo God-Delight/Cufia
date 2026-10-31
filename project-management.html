@@ -1,0 +1,949 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Project Management | Cufia</title>
+    <meta
+      content="We bring disciplined, flexible delivery to your most important projects, so strategy becomes reality and investments deliver their promised benefits."
+      name="description"
+    />
+    <meta
+      content="Project Management | Cufia"
+      property="og:title"
+    />
+    <meta
+      content="Collaborate. Transform. Sustain."
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="cufia-page service-page" id="top">
+      <section class="svc-hero">
+        <header class="cufia-navbar-wrapper" id="siteHeader">
+          <div class="cufia-navbar-bar wrap">
+            <!-- Desktop Floating Nav Capsule (Left Pill) -->
+            <div class="cufia-nav-capsule">
+              <a aria-label="Cufia home" class="cufia-nav-emblem-btn" href="index.html">
+                <span class="cufia-emblem-icon">❖</span>
+              </a>
+              <nav aria-label="Main navigation" class="cufia-desktop-nav-links">
+                <button type="button" class="cufia-nav-link-btn" data-menu="services" aria-expanded="false" aria-haspopup="true">
+                  <span>Services</span>
+                  <svg class="cufia-nav-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <button type="button" class="cufia-nav-link-btn" data-menu="industries" aria-expanded="false" aria-haspopup="true">
+                  <span>Industries</span>
+                  <svg class="cufia-nav-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <button type="button" class="cufia-nav-link-btn" data-menu="insights" aria-expanded="false" aria-haspopup="true">
+                  <span>Insights</span>
+                  <svg class="cufia-nav-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <button type="button" class="cufia-nav-link-btn" data-menu="about" aria-expanded="false" aria-haspopup="true">
+                  <span>About</span>
+                  <svg class="cufia-nav-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+              </nav>
+            </div>
+
+            <!-- Desktop Floating CTA Pill (Right Side) -->
+            <a class="cufia-floating-cta" href="contact.html">
+              Let’s talk
+            </a>
+
+            <!-- Mobile Top Bar (Visible only on mobile/tablet) -->
+            <div class="cufia-mobile-bar-left">
+              <a aria-label="Cufia home" class="cufia-mobile-logo" href="index.html">
+                <span class="cufia-emblem-icon">❖</span>
+                <span class="cufia-mobile-wordmark">cufia</span>
+              </a>
+            </div>
+            <button type="button" class="cufia-mobile-hamburger" id="mobileMenuOpenBtn" aria-label="Open navigation menu" aria-expanded="false">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" x2="20" y1="6" y2="6"/>
+                <line x1="4" x2="20" y1="12" y2="12"/>
+                <line x1="4" x2="20" y1="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- ==================== DESKTOP MEGA MENU PANELS ==================== -->
+          <div class="cufia-megamenu-dropdown-container wrap">
+            <!-- 1. SERVICES MEGA MENU (3-COLUMN INTERACTIVE LAYOUT) -->
+            <div class="cufia-megamenu-card" id="megamenu-services" data-panel="services" hidden>
+              <div class="cufia-services-3col">
+                <!-- Column 1: Services List -->
+                <div class="cufia-services-col1">
+                  <div class="cufia-mm-heading">SERVICES</div>
+                  <div class="cufia-services-navlist" role="tablist">
+                    <button type="button" class="cufia-service-tab active" data-service-key="ai-trans" role="tab" aria-selected="true">
+                      <span>AI Transformation</span>
+                      <svg class="cufia-tab-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-service-tab" data-service-key="training" role="tab" aria-selected="false">
+                      <span>Training</span>
+                      <svg class="cufia-tab-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-service-tab" data-service-key="digital-trans" role="tab" aria-selected="false">
+                      <span>Digital Transformation</span>
+                      <svg class="cufia-tab-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-service-tab" data-service-key="ops-excellence" role="tab" aria-selected="false">
+                      <span>Operational Excellence</span>
+                      <svg class="cufia-tab-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-service-tab" data-service-key="strategy" role="tab" aria-selected="false">
+                      <span>Strategy Advisory</span>
+                      <svg class="cufia-tab-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-service-tab" data-service-key="data-cloud" role="tab" aria-selected="false">
+                      <span>Data &amp; Cloud Transformation</span>
+                      <svg class="cufia-tab-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-service-tab" data-service-key="product-mgmt" role="tab" aria-selected="false">
+                      <span>Product Management</span>
+                      <svg class="cufia-tab-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-service-tab" data-service-key="project-mgmt" role="tab" aria-selected="false">
+                      <span>Project Management</span>
+                      <svg class="cufia-tab-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                  </div>
+                  <div class="cufia-col1-bottom">
+                    <a href="services.html" class="cufia-view-all-link">
+                      <span>View all services</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Column 2: Sub-categories by Service -->
+                <div class="cufia-services-col2">
+                  <!-- Panel 1: AI Transformation -->
+                  <div class="cufia-subpanel active" id="subpanel-ai-trans" data-service-content="ai-trans">
+                    <div class="cufia-subpanel-header">
+                      <h3>AI Transformation</h3>
+                      <p>Turn artificial intelligence strategy into scalable, governed enterprise capabilities.</p>
+                    </div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="ai-transformation.html#ai-readiness-assessment"><span>AI Readiness Assessment</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="ai-transformation.html#ai-governance"><span>AI Governance &amp; Ethics</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="ai-transformation.html#ai-use-case-discovery"><span>AI Use-Case Discovery</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="ai-transformation.html#ai-use-case-deployment"><span>AI Use-Case Deployment</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="ai-transformation.html#enterprise-ai-strategy"><span>Enterprise AI Transformation Strategy</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Panel 2: Training -->
+                  <div class="cufia-subpanel" id="subpanel-training" data-service-content="training">
+                    <div class="cufia-subpanel-header">
+                      <h3>Training</h3>
+                      <p>Equip executive teams, boards, and professionals with mission-critical modern competencies.</p>
+                    </div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="training.html#ai-board-training"><span>AI Board Training</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="training.html#ai-executive-training"><span>AI Executive Training</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="training.html#skills-development-training"><span>Skills Development Training</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="training.html#leadership-and-management-training"><span>Leadership &amp; Management Training</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Panel 3: Digital Transformation -->
+                  <div class="cufia-subpanel" id="subpanel-digital-trans" data-service-content="digital-trans">
+                    <div class="cufia-subpanel-header">
+                      <h3>Digital Transformation</h3>
+                      <p>Architect modern operating architectures, customer experiences, and digital platforms.</p>
+                    </div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="digital-transformation.html#digital-strategy"><span>Digital Strategy</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="digital-transformation.html#digital-operating-model"><span>Digital Operating Model</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="digital-transformation.html#products-and-platforms-digitalisation"><span>Products &amp; Platforms Digitalisation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="digital-transformation.html#customer-experience"><span>Customer Experience (CX)</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="digital-transformation.html#technology-transformation"><span>Technology Transformation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Panel 4: Operational Excellence -->
+                  <div class="cufia-subpanel" id="subpanel-ops-excellence" data-service-content="ops-excellence">
+                    <div class="cufia-subpanel-header">
+                      <h3>Operational Excellence</h3>
+                      <p>Streamline core processes, unlock lean efficiencies, and automate enterprise workflows.</p>
+                    </div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="operational-excellence.html#process-transformation"><span>Process Transformation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="operational-excellence.html#operating-model-transformation"><span>Operating Model Transformation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="operational-excellence.html#performance-and-productivity"><span>Performance &amp; Productivity</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="operational-excellence.html#process-automation"><span>Process Automation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="operational-excellence.html#continuous-improvement"><span>Continuous Improvement</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Panel 5: Strategy Advisory -->
+                  <div class="cufia-subpanel" id="subpanel-strategy" data-service-content="strategy">
+                    <div class="cufia-subpanel-header">
+                      <h3>Strategy Advisory</h3>
+                      <p>Bridge high-altitude vision and concrete execution with grounded, actionable roadmaps.</p>
+                    </div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="strategy-advisory.html#corporate-and-business-strategy"><span>Corporate &amp; Business Strategy</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="strategy-advisory.html#growth-and-market-entry"><span>Growth &amp; Market Entry</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="strategy-advisory.html#customer-strategy"><span>Customer Strategy</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="strategy-advisory.html#innovation-strategy"><span>Innovation Strategy</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="strategy-advisory.html#strategy-execution-and-transformation-office"><span>Strategy Implementation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Panel 6: Data & Cloud -->
+                  <div class="cufia-subpanel" id="subpanel-data-cloud" data-service-content="data-cloud">
+                    <div class="cufia-subpanel-header">
+                      <h3>Data &amp; Cloud Transformation</h3>
+                      <p>Build elastic, future-ready infrastructure and trustworthy data pipelines.</p>
+                    </div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="data-cloud-transformation.html#data-strategy"><span>Data Strategy</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="data-cloud-transformation.html#data-governance"><span>Data Governance</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="data-cloud-transformation.html#analytics"><span>Analytics &amp; BI</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="data-cloud-transformation.html#cloud-strategy"><span>Cloud Strategy</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="data-cloud-transformation.html#cloud-migration-and-modernisation"><span>Cloud Migration &amp; Modernisation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="data-cloud-transformation.html#data-and-ai-infrastructure"><span>Data &amp; AI Infrastructure</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Panel 7: Product Management -->
+                  <div class="cufia-subpanel" id="subpanel-product-mgmt" data-service-content="product-mgmt">
+                    <div class="cufia-subpanel-header">
+                      <h3>Product Management</h3>
+                      <p>Accelerate discovery, validate value propositions, and institute high-performing product squads.</p>
+                    </div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="product-management.html#product-strategy"><span>Product Strategy</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="product-management.html#product-discovery"><span>Product Discovery</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="product-management.html#digital-product-development"><span>Digital Product Development</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="product-management.html#product-operating-model"><span>Product Operating Model</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="product-management.html#product-leadership-support"><span>Product Leadership Support</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Panel 8: Project Management -->
+                  <div class="cufia-subpanel" id="subpanel-project-mgmt" data-service-content="project-mgmt">
+                    <div class="cufia-subpanel-header">
+                      <h3>Project Management</h3>
+                      <p>Deliver complex, business-critical initiatives with disciplined PMO governance and agile velocity.</p>
+                    </div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="#portfolio-and-pmo-set-up"><span>Portfolio &amp; PMO Set-up</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="#programme-and-project-delivery"><span>Programme &amp; Project Delivery</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="#agile-transformation"><span>Agile Transformation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="#project-recovery"><span>Project Recovery</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="#benefits-realisation"><span>Benefits Realisation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Column 3: Featured Image / Resource Card (Dynamic per service) -->
+                <div class="cufia-services-col3">
+                  <div class="cufia-mm-heading">FEATURED SPOTLIGHT</div>
+                  
+                  <!-- Card for AI Transformation -->
+                  <div class="cufia-feature-card active" data-feature-content="ai-trans">
+                    <div class="cufia-feature-card-media">
+                      <img src="AI Transformation.jpeg" alt="Enterprise AI Transformation" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">CASE SPOTLIGHT</span>
+                      <h4>Enterprise AI Readiness at Scale</h4>
+                      <p>How global enterprises navigate compliance, safety, and measurable operational ROI.</p>
+                      <a href="ai-transformation.html" class="cufia-feature-cta">Explore capabilities &rarr;</a>
+                    </div>
+                  </div>
+
+                  <!-- Card for Training -->
+                  <div class="cufia-feature-card" data-feature-content="training">
+                    <div class="cufia-feature-card-media">
+                      <img src="AI Training.jpg" alt="Executive Training" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">LEADERSHIP PROGRAM</span>
+                      <h4>Executive &amp; Board Fluency</h4>
+                      <p>Hands-on workshops transforming leaders into confident technology stewards.</p>
+                      <a href="training.html" class="cufia-feature-cta">Learn about training &rarr;</a>
+                    </div>
+                  </div>
+
+                  <!-- Card for Digital Transformation -->
+                  <div class="cufia-feature-card" data-feature-content="digital-trans">
+                    <div class="cufia-feature-card-media">
+                      <img src="Digital Transformation.jpg" alt="Digital Transformation" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">OPERATING MODEL</span>
+                      <h4>Omnichannel Architecture</h4>
+                      <p>Connecting legacy systems with reactive customer touchpoints.</p>
+                      <a href="digital-transformation.html" class="cufia-feature-cta">View case studies &rarr;</a>
+                    </div>
+                  </div>
+
+                  <!-- Card for Operational Excellence -->
+                  <div class="cufia-feature-card" data-feature-content="ops-excellence">
+                    <div class="cufia-feature-card-media">
+                      <img src="Operations.jpg" alt="Operational Excellence" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">EFFICIENCY &amp; LEAN</span>
+                      <h4>Process Automation &amp; Velocity</h4>
+                      <p>Eliminating bottlenecks to expand capacity and operational resilience.</p>
+                      <a href="operational-excellence.html" class="cufia-feature-cta">Explore operations &rarr;</a>
+                    </div>
+                  </div>
+
+                  <!-- Card for Strategy Advisory -->
+                  <div class="cufia-feature-card" data-feature-content="strategy">
+                    <div class="cufia-feature-card-media">
+                      <img src="Strategy Advisory.jpg" alt="Strategy Advisory" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">STRATEGIC GROWTH</span>
+                      <h4>Market Entry &amp; Horizon 3 Vision</h4>
+                      <p>Navigating high-growth African and emerging market ecosystems.</p>
+                      <a href="strategy-advisory.html" class="cufia-feature-cta">Read strategy brief &rarr;</a>
+                    </div>
+                  </div>
+
+                  <!-- Card for Data & Cloud -->
+                  <div class="cufia-feature-card" data-feature-content="data-cloud">
+                    <div class="cufia-feature-card-media">
+                      <img src="Cloud.jpg" alt="Data and Cloud" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">CLOUD INFRASTRUCTURE</span>
+                      <h4>Modern Data Governance</h4>
+                      <p>Building trusted data lakes, automated compliance, and scalable AI infrastructure.</p>
+                      <a href="data-cloud-transformation.html" class="cufia-feature-cta">Discover architecture &rarr;</a>
+                    </div>
+                  </div>
+
+                  <!-- Card for Product Management -->
+                  <div class="cufia-feature-card" data-feature-content="product-mgmt">
+                    <div class="cufia-feature-card-media">
+                      <img src="Product Management.jpg" alt="Product Management" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">PRODUCT LEADERSHIP</span>
+                      <h4>Discovery to Delivery Engine</h4>
+                      <p>Embedding customer discovery loops directly into release cadences.</p>
+                      <a href="product-management.html" class="cufia-feature-cta">See product playbooks &rarr;</a>
+                    </div>
+                  </div>
+
+                  <!-- Card for Project Management -->
+                  <div class="cufia-feature-card" data-feature-content="project-mgmt">
+                    <div class="cufia-feature-card-media">
+                      <img src="Project Management.jpg" alt="Project Management" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">PMO &amp; EXECUTION</span>
+                      <h4>Guaranteed Programme Delivery</h4>
+                      <p>Orchestrating complex vendor landscapes, timelines, and measurable milestones.</p>
+                      <a href="project-management.html" class="cufia-feature-cta">Explore PMO frameworks &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. INDUSTRIES DROPDOWN CARD -->
+            <div class="cufia-megamenu-card" id="megamenu-industries" data-panel="industries" hidden>
+              <div class="cufia-dropdown-grid cufia-industries-grid">
+                <!-- Left Editorial Box -->
+                <div class="cufia-editorial-col">
+                  <h3>Specialised expertise for your industry's pivotal challenges.</h3>
+                  <p>Our cross-functional teams bring deep domain pedigree across regulated financial markets, technology enterprises, and public institutions.</p>
+                  <a href="industries.html" class="cufia-editorial-link">View all industries &rarr;</a>
+                </div>
+
+                <!-- Middle Columns: Industries List -->
+                <div class="cufia-dropdown-navcols">
+                  <div class="cufia-nav-col">
+                    <div class="cufia-mm-heading">KEY SECTORS</div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="industries.html"><span>Financial Services</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="industries.html"><span>Capital Markets</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="industries.html"><span>Legal &amp; Professional</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="industries.html"><span>Technology &amp; SaaS</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+                  <div class="cufia-nav-col">
+                    <div class="cufia-mm-heading">MORE SECTORS</div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="industries.html"><span>Energy &amp; Utilities</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="industries.html"><span>Manufacturing &amp; Logistics</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="industries.html"><span>Public Sector &amp; NGOs</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="industries.html"><span>Corporate Services &amp; Others</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Right Column: Featured Sector Spotlight -->
+                <div class="cufia-dropdown-feature-col">
+                  <div class="cufia-mm-heading">FEATURED SECTOR</div>
+                  <div class="cufia-feature-card static-card">
+                    <div class="cufia-feature-card-media">
+                      <img src="Industry.jpg" alt="Financial Services and Industry" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">FINANCIAL SERVICES</span>
+                      <h4>Core Banking Modernisation in Africa</h4>
+                      <p>Transforming payment rails, cross-border remittances, and real-time fraud mitigation.</p>
+                      <a href="industries.html" class="cufia-feature-cta">Read industry overview &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. INSIGHTS DROPDOWN CARD -->
+            <div class="cufia-megamenu-card" id="megamenu-insights" data-panel="insights" hidden>
+              <div class="cufia-dropdown-grid cufia-insights-grid">
+                <div class="cufia-dropdown-navcols">
+                  <div class="cufia-nav-col">
+                    <div class="cufia-mm-heading">CASE STUDIES</div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="index.html#case-studies"><span>Transformation in Africa Series</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="index.html#case-studies"><span>Tier-1 Bank AI Deployment</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="index.html#case-studies"><span>Public Sector Digital Modernisation</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+                  <div class="cufia-nav-col">
+                    <div class="cufia-mm-heading">ARTICLES &amp; PERSPECTIVES</div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="insights.html"><span>The AI-Ready Enterprise in 2026</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="insights.html"><span>Bridging Strategy &amp; Board Governance</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="insights.html"><span>Cloud Migration Pitfalls &amp; Playbooks</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="cufia-dropdown-feature-col">
+                  <div class="cufia-mm-heading">FEATURED RESOURCE</div>
+                  <div class="cufia-feature-card static-card">
+                    <div class="cufia-feature-card-media">
+                      <img src="SOftware engineer.jpg" alt="A World Where Humans + AI Work as One" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">THOUGHT LEADERSHIP</span>
+                      <h4>A World Where Humans + AI Work as One</h4>
+                      <p>How emerging market leaders build compounding competitive advantage through talent and intelligent systems.</p>
+                      <a href="insights.html" class="cufia-feature-cta">Read full perspective &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. ABOUT DROPDOWN CARD -->
+            <div class="cufia-megamenu-card" id="megamenu-about" data-panel="about" hidden>
+              <div class="cufia-dropdown-grid cufia-about-grid">
+                <div class="cufia-dropdown-navcols">
+                  <div class="cufia-nav-col">
+                    <div class="cufia-mm-heading">WHO WE ARE</div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="about.html"><span>Our Story &amp; Purpose</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="index.html#approach"><span>Our Transformation Approach</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="index.html#why-cufia"><span>Why Global Leaders Choose Cufia</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+                  <div class="cufia-nav-col">
+                    <div class="cufia-mm-heading">LEADERSHIP &amp; TALENT</div>
+                    <ul class="cufia-subcat-list">
+                      <li><a href="about.html"><span>Our Team &amp; Expert Council</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="contact.html"><span>Careers &amp; Expert Council Roles</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                      <li><a href="contact.html"><span>Global Hubs &amp; Locations</span><svg class="cufia-link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="cufia-dropdown-feature-col">
+                  <div class="cufia-mm-heading">EXPERT COUNCIL</div>
+                  <div class="cufia-feature-card static-card">
+                    <div class="cufia-feature-card-media">
+                      <img src="Board of directors.jpg" alt="Cufia Expert Council" loading="lazy">
+                    </div>
+                    <div class="cufia-feature-card-body">
+                      <span class="cufia-feature-tag">ADVISORY COUNCIL</span>
+                      <h4>Senior Operators. Zero Theory.</h4>
+                      <p>Seasoned executive operators and technical fellows embedded alongside your senior management.</p>
+                      <a href="about.html" class="cufia-feature-cta">Meet the council &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- ==================== MOBILE NAVIGATION DRAWER (ACCENTURE DRILL-DOWN FLOW) ==================== -->
+        <div class="cufia-mobile-drawer" id="mobileDrawer" aria-hidden="true">
+          <div class="cufia-mobile-backdrop" id="mobileBackdrop"></div>
+          <div class="cufia-mobile-container" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+            <div class="cufia-mobile-track-wrapper" id="mobileTrackWrapper">
+              <!-- LEVEL 1: MAIN MENU SCREEN -->
+              <div class="cufia-mobile-screen" id="mobileScreen1">
+                <div class="cufia-mobile-screen-header">
+                  <button type="button" class="cufia-mobile-icon-btn" id="mobileMenuCloseBtn" aria-label="Close navigation">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                  <div class="cufia-mobile-brand-pill">
+                    <span class="cufia-emblem-icon">❖</span>
+                    <span>cufia</span>
+                  </div>
+                </div>
+
+                <div class="cufia-mobile-nav-body">
+                  <div class="cufia-mobile-primary-links">
+                    <button type="button" class="cufia-mobile-level1-btn" data-drilldown="services">
+                      <span>Services</span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-mobile-level1-btn" data-drilldown="industries">
+                      <span>Industries</span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-mobile-level1-btn" data-drilldown="insights">
+                      <span>Insights</span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <button type="button" class="cufia-mobile-level1-btn" data-drilldown="about">
+                      <span>About Us</span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                  </div>
+
+                  <div class="cufia-mobile-secondary-links">
+                    <a href="contact.html" class="cufia-mobile-sublink">Contact Us</a>
+                    <a href="about.html" class="cufia-mobile-sublink">Careers</a>
+                    <a href="contact.html" class="cufia-mobile-sublink">Locations</a>
+                  </div>
+
+                  <div class="cufia-mobile-cta-row">
+                    <a href="contact.html" class="cufia-mobile-cta-btn">Let’s talk</a>
+                  </div>
+
+                  <div class="cufia-mobile-social-row">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.7a1.62 1.62 0 0 0-1.63 1.63c0 .9.73 1.63 1.63 1.63.9 0 1.63-.73 1.63-1.63A1.62 1.62 0 0 0 7.83 6.7z"/></svg>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12z"/></svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- LEVEL 2: DRILL-DOWN SUB-SCREEN (ACCENTURE FLOW) -->
+              <div class="cufia-mobile-screen" id="mobileScreen2">
+                <div class="cufia-mobile-screen-header">
+                  <button type="button" class="cufia-mobile-back-btn" id="mobileMenuBackBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+                    <span>Back</span>
+                  </button>
+                  <button type="button" class="cufia-mobile-icon-btn" id="mobileMenuCloseBtn2" aria-label="Close navigation">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+
+                <div class="cufia-mobile-drilldown-header">
+                  <h2 id="mobileDrilldownTitle">Services</h2>
+                  <span class="cufia-drilldown-badge">›</span>
+                </div>
+
+                <div class="cufia-mobile-drilldown-content" id="mobileDrilldownContent">
+                  <!-- Dynamic Accordions injected based on selected section -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <svg
+          aria-hidden="true"
+          class="waves reveal-fade reveal-delay-3"
+          preserveaspectratio="none"
+          viewbox="0 0 1600 400"
+        >
+          <path
+            d="M -100 65 C 300 -15, 540 370, 850 200 S 1330 20, 1700 70"
+          ></path>
+          <path
+            d="M -100 75 C 300 0, 540 377, 850 209 S 1330 28, 1700 83"
+          ></path>
+          <path
+            d="M -100 85 C 300 15, 540 384, 850 218 S 1330 36, 1700 96"
+          ></path>
+          <path
+            d="M -100 95 C 300 30, 540 391, 850 227 S 1330 44, 1700 109"
+          ></path>
+          <path
+            d="M -100 105 C 300 45, 540 398, 850 236 S 1330 52, 1700 122"
+          ></path>
+          <path
+            d="M -100 115 C 300 60, 540 405, 850 245 S 1330 60, 1700 135"
+          ></path>
+          <path
+            d="M -100 125 C 300 75, 540 412, 850 254 S 1330 68, 1700 148"
+          ></path>
+          <path
+            d="M -100 135 C 300 90, 540 419, 850 263 S 1330 76, 1700 161"
+          ></path>
+          <path
+            d="M -100 145 C 300 105, 540 426, 850 272 S 1330 84, 1700 174"
+          ></path>
+          <path
+            d="M -100 155 C 300 120, 540 433, 850 281 S 1330 92, 1700 187"
+          ></path>
+          <path
+            d="M -100 165 C 300 135, 540 440, 850 290 S 1330 100, 1700 200"
+          ></path>
+          <path
+            d="M -100 175 C 300 150, 540 447, 850 299 S 1330 108, 1700 213"
+          ></path>
+          <path
+            d="M -100 185 C 300 165, 540 454, 850 308 S 1330 116, 1700 226"
+          ></path>
+          <path
+            d="M -100 195 C 300 180, 540 461, 850 317 S 1330 124, 1700 239"
+          ></path>
+          <path
+            d="M -100 205 C 300 195, 540 468, 850 326 S 1330 132, 1700 252"
+          ></path>
+          <path
+            d="M -100 215 C 300 210, 540 475, 850 335 S 1330 140, 1700 265"
+          ></path>
+          <path
+            d="M -100 225 C 300 225, 540 482, 850 344 S 1330 148, 1700 278"
+          ></path>
+          <path
+            d="M -100 235 C 300 240, 540 489, 850 353 S 1330 156, 1700 291"
+          ></path>
+          <path
+            d="M -100 245 C 300 255, 540 496, 850 362 S 1330 164, 1700 304"
+          ></path>
+          <path
+            d="M -100 255 C 300 270, 540 503, 850 371 S 1330 172, 1700 317"
+          ></path>
+          <path
+            d="M -100 265 C 300 285, 540 510, 850 380 S 1330 180, 1700 330"
+          ></path>
+          <path
+            d="M -100 275 C 300 300, 540 517, 850 389 S 1330 188, 1700 343"
+          ></path>
+        </svg>
+        <div class="svc-hero-inner wrap">
+          <div>
+            <p class="hero-kicker reveal-item reveal-delay-1">PROJECT MANAGEMENT</p>
+            <h1 class="reveal-item reveal-delay-2">Deliver what matters, on time and on budget.</h1>
+          </div>
+          <div class="sp-hero-side reveal-item reveal-delay-3">
+            <p class="svc-hero-copy">We bring disciplined, flexible delivery to your most important projects, so strategy becomes reality and investments deliver their promised benefits.</p>
+            <a
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 cufia-cta"
+            href="contact.html"
+            >Let’s talk<span
+              ><svg
+                aria-hidden="true"
+                class="lucide lucide-arrow-up-right"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewbox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path></svg></span
+          ></a
+          >
+          </div>
+        </div>
+      </section>
+      <!-- ==================== PICTURE + THE CHALLENGE ==================== -->
+      <section class="sp-intro">
+        <div class="wrap">
+          <figure class="sp-photo reveal-item"><img alt="Project Management" src="Project Management.jpg" /></figure>
+          <div class="sp-intro-text reveal-item reveal-delay-1">
+            <p class="eyebrow"><span></span>THE CHALLENGE</p>
+            <h2>Great strategies fail in execution.</h2>
+            <p>Large projects and programmes often run late, over budget and short of their goals. Common causes include unclear scope, weak governance, technical gap, poor visibility of risks and too many competing priorities. For public institutions, delays can also affect citizens and public trust.</p>
+          </div>
+        </div>
+      </section>
+      <!-- ==================== HOW WE HELP (stacking cards) ==================== -->
+      <section class="sp-stack-section">
+        <div class="wrap">
+          <h2 class="reveal-item">How we help</h2>
+          <div class="stack">
+          <article class="stack-card stack-card--blue" id="portfolio-and-pmo-set-up" style="--i: 0">
+            <div class="stack-card-text">
+              <span class="stack-num">01</span>
+              <div>
+                <h3>Portfolio &amp; PMO Set-up</h3>
+                <p class="stack-lead">Invest in the right initiatives.</p>
+                <p class="stack-body">We design and set up portfolio management and project management offices (PMOs) that prioritise work, track progress and give leaders clear visibility.</p>
+              </div>
+            </div>
+            <figure class="stack-card-img"><img alt="Portfolio &amp; PMO Set-up" loading="lazy" src="Portfolio and PMO Set-up.jpg" /></figure>
+          </article>
+          <article class="stack-card stack-card--white" id="programme-and-project-delivery" style="--i: 1">
+            <div class="stack-card-text">
+              <span class="stack-num">02</span>
+              <div>
+                <h3>Programme &amp; Project Delivery</h3>
+                <p class="stack-lead">Get complex work done.</p>
+                <p class="stack-body">Our PMP- and SAFe-certified professionals lead or support the delivery of transformation, technology and infrastructure projects.</p>
+              </div>
+            </div>
+            <figure class="stack-card-img"><img alt="Programme &amp; Project Delivery" loading="lazy" src="Programme and Project Delivery.jpg" /></figure>
+          </article>
+          <article class="stack-card stack-card--sand" id="agile-transformation" style="--i: 2">
+            <div class="stack-card-text">
+              <span class="stack-num">03</span>
+              <div>
+                <h3>Agile Transformation</h3>
+                <p class="stack-lead">Deliver in smaller, faster steps.</p>
+                <p class="stack-body">We help teams and organisations adopt agile and scaled agile methods, adapted to your culture and governance needs.</p>
+              </div>
+            </div>
+            <figure class="stack-card-img"><img alt="Agile Transformation" loading="lazy" src="Agile Transformation.jpg" /></figure>
+          </article>
+          <article class="stack-card stack-card--white" id="project-recovery" style="--i: 3">
+            <div class="stack-card-text">
+              <span class="stack-num">04</span>
+              <div>
+                <h3>Project Recovery</h3>
+                <p class="stack-lead">Get troubled projects back on track.</p>
+                <p class="stack-body">We rapidly assess struggling programmes, identify root causes and put a realistic recovery plan in place.</p>
+              </div>
+            </div>
+            <figure class="stack-card-img"><img alt="Project Recovery" loading="lazy" src="Project Recovery.jpg" /></figure>
+          </article>
+          <article class="stack-card stack-card--blue" id="benefits-realisation" style="--i: 4">
+            <div class="stack-card-text">
+              <span class="stack-num">05</span>
+              <div>
+                <h3>Benefits Realisation</h3>
+                <p class="stack-lead">Make sure the investment pays off.</p>
+                <p class="stack-body">We define, track and report the benefits each programme is expected to deliver, long after go-live.</p>
+              </div>
+            </div>
+            <figure class="stack-card-img"><img alt="Benefits Realisation" loading="lazy" src="Benefits Realisation.jpg" /></figure>
+          </article>
+          </div>
+        </div>
+      </section>
+      <!-- ==================== WHAT YOU CAN EXPECT ==================== -->
+      <section class="sp-expect">
+        <div class="wrap">
+          <h2 class="reveal-item">What you can expect</h2>
+          <ul class="sp-ticks reveal-item reveal-delay-1">
+            <li><span class="tick"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span><span>Predictable delivery within scope, time and budget</span></li>
+            <li><span class="tick"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span><span>Dashboards and trackers that shows progress and insights at a glance</span></li>
+            <li><span class="tick"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span><span>Clear governance and reporting for boards and sponsors</span></li>
+            <li><span class="tick"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span><span>Early visibility of risks and issues</span></li>
+            <li><span class="tick"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span><span>Proof that investments delivered their expected value</span></li>
+          </ul>
+        </div>
+      </section>
+      <!-- ==================== WHY CUFIA ==================== -->
+      <section class="sp-why">
+        <div class="wrap">
+          <h2 class="reveal-item">Why Cufia</h2>
+          <p class="reveal-item reveal-delay-1">Our team combines PMP, SAFe and Lean Six Sigma credentials with hands-on experience delivering complex technology, transformation and infrastructure projects.</p>
+        </div>
+      </section>
+      <!-- ==================== FAQ SECTION ==================== -->
+      <section class="faq-section">
+        <div class="wrap faq-layout">
+          <div class="faq-left reveal-item">
+            <div>
+              <p class="eyebrow"><span></span>FAQs</p>
+              <h2>Your commonly<br />asked questions</h2>
+            </div>
+            <div class="faq-contact">
+              <p>Need guidance?<br />Let’s start a conversation.</p>
+              <a
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 cufia-cta"
+                href="contact.html"
+                >Get in touch<span
+                  ><svg
+                    aria-hidden="true"
+                    class="lucide lucide-arrow-up-right"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewbox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M7 7h10v10"></path>
+                    <path d="M7 17 17 7"></path></svg></span
+              ></a>
+            </div>
+          </div>
+          <div class="faq-list">
+            <details class="reveal-item reveal-delay-1" open="">
+              <summary>
+                Can you step in on a project that is already in trouble?<span class="faq-toggle"></span>
+              </summary>
+              <p>
+                Yes. Our Project Recovery service rapidly assesses struggling programmes, identifies the root causes and puts a realistic recovery plan in place.
+              </p>
+            </details>
+            <details class="reveal-item reveal-delay-2">
+              <summary>
+                Do you set up PMOs as well as run projects?<span class="faq-toggle"></span>
+              </summary>
+              <p>
+                Both. We design and set up portfolio management and project management offices (PMOs) that prioritise work, track progress and give leaders clear visibility, and our PMP- and SAFe-certified professionals can lead or support delivery.
+              </p>
+            </details>
+            <details class="reveal-item reveal-delay-3">
+              <summary>
+                How will we know the investment delivered value?<span class="faq-toggle"></span>
+              </summary>
+              <p>
+                Through benefits realisation. We define, track and report the benefits each programme is expected to deliver, long after go-live, with clear governance and reporting for boards and sponsors.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <!-- ==================== CTA SECTION ==================== -->
+      <section class="cta-section screen-section" id="contact">
+        <div class="wrap cta-inner cta-inner--service reveal-zoom">
+          <h2>Planning a major project, or struggling to deliver one?</h2>
+          <p>From single projects to complex transformation programmes, our certified experts help you set up for success or get back on track, fast.</p>
+          <a
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 cufia-cta"
+            href="contact.html"
+            data-arrow-cta
+            >Let’s talk<span
+              ><svg
+                aria-hidden="true"
+                class="lucide lucide-arrow-up-right"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewbox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path></svg></span
+          ></a
+          >
+        </div>
+      </section>
+      <!-- ==================== FOOTER SECTION (sticky reveal) ==================== -->
+      <footer class="sticky-footer">
+        <div class="sticky-footer-fixed">
+          <div class="sticky-footer-scroll">
+            <div class="sticky-footer-inner">
+              <div aria-hidden="true" class="sticky-footer-glow">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div class="sticky-footer-main">
+                <div class="sticky-footer-brand footer-anim" style="--d: 0.1s">
+                  <a class="footer-logo" href="index.html"><span class="brand-mark">❖</span>cufia</a>
+                  <h3>Collaborate. Transform. Sustain</h3>
+                  <p>Where global expertise meets<br />your ambition every time.</p>
+                  <div class="footer-socials">
+                    <a aria-label="Facebook" href="#"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    <a aria-label="Instagram" href="#"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+                    <a aria-label="YouTube" href="#"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
+                    <a aria-label="LinkedIn" href="#"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                  </div>
+                </div>
+                <div class="footer-group footer-anim" style="--d: 0.2s">
+                  <h4>Services</h4>
+                  <ul>
+                    <li><a href="ai-transformation.html">AI Transformation</a></li>
+                    <li><a href="training.html">Training</a></li>
+                    <li><a href="digital-transformation.html">Digital Transformation</a></li>
+                    <li><a href="strategy-advisory.html">Strategy Advisory</a></li>
+                    <li><a href="operational-excellence.html">Operational Excellence</a></li>
+                    <li><a href="data-cloud-transformation.html">Data &amp; Cloud Transformation</a></li>
+                    <li><a href="product-management.html">Product Management</a></li>
+                    <li><a href="project-management.html">Project Management</a></li>
+                  </ul>
+                </div>
+                <div class="footer-group footer-anim" style="--d: 0.3s">
+                  <h4>Pages</h4>
+                  <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="industries.html">Industries</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                  </ul>
+                </div>
+                <div class="footer-group footer-anim" style="--d: 0.4s">
+                  <h4>Our approach</h4>
+                  <ul>
+                    <li><a href="index.html#approach">Discover</a></li>
+                    <li><a href="index.html#approach">Design</a></li>
+                    <li><a href="index.html#approach">Deliver</a></li>
+                    <li><a href="index.html#approach">Deepen</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-newsletter footer-anim" style="--d: 0.5s">
+                <h3>Stay informed</h3>
+                <p>Get practical insights on AI and transformation in Africa, once a month.</p>
+                <form class="newsletter-form" id="newsletterForm" novalidate>
+                  <label class="sr-only" for="newsletterEmail">Email address</label>
+                  <input autocomplete="email" id="newsletterEmail" name="email" placeholder="Enter your email" type="email" />
+                  <button type="submit">Subscribe</button>
+                </form>
+                <p aria-live="polite" class="newsletter-msg" id="newsletterMsg" role="status"></p>
+              </div>
+              <div class="sticky-footer-bottom">
+                <p>© 2026 Cufia. All rights reserved.</p>
+                <nav aria-label="Legal" class="footer-legal">
+                  <a href="#">Privacy Policy</a>
+                  <a href="#">Terms of Service</a>
+                  <a href="#">Cookie Policy</a>
+                </nav>
+                <a href="#top">Back to top <svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <!-- Arrow CTA overlay: draws the dashed arrow from the cursor to the CTA button -->
+    <canvas aria-hidden="true" class="arrow-cta-canvas" id="arrowCtaCanvas"></canvas>
+    <script src="script.js"></script>
+  </body>
+</html>
