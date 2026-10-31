@@ -396,6 +396,21 @@ function setupFloatingNavigation() {
   const mobileDrilldownTitle = document.getElementById("mobileDrilldownTitle");
   const mobileDrilldownContent = document.getElementById("mobileDrilldownContent");
 
+  // Where each mobile-menu link should go. Main pages always open their own page;
+  // anything else stays an in-page anchor when that section exists on the current page,
+  // otherwise it opens the page that owns it.
+  const ownPageLinks = {
+    "#industries": "industries.html",
+    "#insights": "insights.html",
+    "#about": "about.html",
+    "#contact": "contact.html",
+  };
+  const resolveNavTarget = (target) => {
+    if (ownPageLinks[target]) return ownPageLinks[target];
+    if (document.getElementById(target.slice(1))) return target;
+    return (target.startsWith("#service-") ? "services.html" : "index.html") + target;
+  };
+
   const mobileData = {
     services: {
       title: "Services",
@@ -562,7 +577,7 @@ function setupFloatingNavigation() {
 
       item.subs.forEach(sub => {
         const link = document.createElement("a");
-        link.href = item.target;
+        link.href = resolveNavTarget(item.target);
         link.textContent = sub;
         link.addEventListener("click", () => {
           closeMobileDrawer();

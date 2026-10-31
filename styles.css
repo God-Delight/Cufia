@@ -2682,7 +2682,7 @@ html.js-ready .reveal-fade.is-revealed {
   min-height: 62svh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible; /* lets the nav mega menu drop below this shorter hero */
 }
 .svc-hero > .waves { top: 18%; height: 42%; }
 .svc-hero-inner {
